@@ -106,7 +106,7 @@ def LoadingInstance():
     dic={}
     try:
         for i in range(0,Config.InstanceNumber):
-            dic['Instance'+str(i+1)]= config.get('INSTANCE'+str(i+1),'Name'),config.get('INSTANCE'+str(i+1),'WorshopList'),config.get('INSTANCE'+str(i+1),'ModsList')
+            dic['Instance'+str(i+1)]= config.get('INSTANCE'+str(i+1),'Name'),config.get('INSTANCE'+str(i+1),'workshoplist'),config.get('INSTANCE'+str(i+1),'ModsList')
     except:
         return Translate.ErrorInstance('')
     return ChooseYourInstance(dic)
