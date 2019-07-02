@@ -151,4 +151,4 @@ print(init())
 inst=LoadingInstance()
 print(inst[0])
 InstanceAppli(inst[1],inst[2])
-#Todo : Support Collection, Inteface Graphique avec Nom et Image, Createur d'instance
+#Todo : Support Collection, Inteface Graphique avec Nom et Image
