@@ -1,9 +1,10 @@
-from urllib.request import urlopen, Request
 import configparser as cp
 import os
-from libCollectionSteam import Collection, TitleWorkshop
 import tkinter as tk
 from tkinter import filedialog
+from urllib.request import urlopen, Request
+
+from libCollectionSteam import Collection, TitleWorkshop
 
 
 class Translate:
@@ -12,6 +13,12 @@ class Translate:
             return
         else:
             return
+
+    def Cleaner(self=''):
+        if Config.TranslateConfig == "fr":
+            return "Voulez-vous nettoyer le fichier config ?\n1.Oui\n2.Non\n"
+        else:
+            return "Do you want to clean the config file?\n1.Oui\n2.None\n"
 
     def ConfigFile(self=''):
         if Config.TranslateConfig == "fr":
@@ -33,9 +40,9 @@ class Translate:
 
     def Choice(self):
         if Config.TranslateConfig == "fr":
-            return "Que voulez-vous faire?\n1.Modifier une instance\n2.En creez une nouvelle.\n3.Modifier le fichier config\n"
+            return "Que voulez-vous faire?\n1.Modifier une instance\n2.En creez une nouvelle.\n3.Modifier le fichier config\n4.Nettoyez le fichier config\n"
         else:
-            return "What you want to do?\n1.Modify a existed Instance\n2.Create a new one.\n3.Modify the config file\n"
+            return "What you want to do?\n1.Modify a existed Instance\n2.Create a new one.\n3.Modify the config file\n4.Clean the config file\n"
 
     def NameInstance(self=''):
         if Config.TranslateConfig == "fr":
@@ -282,6 +289,8 @@ def ChoiceWhatToDo():
         return CreateInstance()
     elif ch == 3:
         return ConfigFile()
+    elif ch == 4:
+        return CleanerConfig()
     else:
         return ChoiceWhatToDo()
 
@@ -708,6 +717,71 @@ def CollectionManipulate(dic, ch, Etat):
         with open('config.ini', 'w') as settings:
             config.write(settings)
         return ModifyYourInstance(refreshdic(), ch)
+
+
+def CleanerConfig():
+    try:
+        choice = int(input(Translate.Cleaner('')))
+    except:
+        return CleanerConfig()
+    if choice == 1:
+        dic = refreshdic()
+        for i in range(1, Config.InstanceNumber + 1):
+            WorkshopList = convertString(dic['Instance' + str(i)][1])
+            ModsList = convertString(dic['Instance' + str(i)][2])
+            direc = directSearch(Config.SteamAppsPath + "\\workshop\content\\211820")
+            for y in range(len(direc)):
+                direc[y] = direc[y].replace("Disabled.", "")
+            y = 0
+            while y < len(WorkshopList):
+                temp = WorkshopList[y]
+                if WorkshopList.count(temp) > 1 or temp not in direc:
+                    y = 0
+                else:
+                    y = y + 1
+                for w in range(0, 2):
+                    if WorkshopList.count(temp) > 1:
+                        while WorkshopList.count(temp) != 1:
+                            WorkshopList.remove(temp)
+                    if temp not in direc and temp != "None":
+                        while WorkshopList.count(temp) != 0:
+                            WorkshopList.remove(temp)
+                    if len(WorkshopList) != 0:
+                        temp = WorkshopList[len(WorkshopList) - 1]
+            direc = directSearch(Config.SteamAppsPath + "\common\\Starbound\mods")
+            for y in range(len(direc)):
+                direc[y] = direc[y].replace(".Disabled.", "")
+            y = 0
+            while y < len(ModsList):
+                temp = ModsList[y]
+                if ModsList.count(temp) > 1 or temp not in direc:
+                    y = 0
+                else:
+                    y = y + 1
+                for w in range(0, 2):
+                    if ModsList.count(temp) > 1:
+                        while ModsList.count(temp) != 1:
+                            ModsList.remove(temp)
+                    if temp not in direc:
+                        while ModsList.count(temp) != 0:
+                            ModsList.remove(temp)
+                    if len(ModsList) != 0:
+                        temp = ModsList[len(ModsList) - 1]
+
+            if len(ModsList) == 0:
+                ModsList.append('None')
+            if len(WorkshopList) == 0:
+                WorkshopList.append('None')
+            config = cp.ConfigParser()
+            config.read_file(open('config.ini'))
+            config.set('INSTANCE' + str(i), 'WorkshopList', convertList(WorkshopList))
+            config.set('INSTANCE' + str(i), 'modslist', convertList(ModsList))
+            with open('config.ini', 'w') as settings:
+                config.write(settings)
+        print(Translate.ChangeDone(''))
+        return ChoiceWhatToDo()
+    else:
+        return ChoiceWhatToDo()
 
 
 def ModifyYourInstance(dic, ch):
