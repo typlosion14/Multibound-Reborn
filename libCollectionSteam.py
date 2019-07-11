@@ -1,7 +1,6 @@
 from CobraLib import source_html
 
-
-def Collection(collectionid):  # 1357125616 #Made by Leslie M. and reworked by my
+def Collection(collectionid):  # 1357125616
     myStr = source_html("https://steamcommunity.com/sharedfiles/filedetails/?id=" + str(collectionid))
     id = []
     pos = 1
@@ -32,4 +31,5 @@ def TitleWorkshop(appid):  # 1790667104
     Title = data_html[pos1:data_html.find('</div', pos1)]
     if len(Title) > 100:
         return "Not Found"
+    print("...")
     return Title
