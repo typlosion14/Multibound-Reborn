@@ -246,7 +246,7 @@ class Translate:
             return "Quit Starbound..."
 
 
-def init():
+def init(): #Load Config.ini
     config = cp.ConfigParser()
     try:
         config.read_file(open('config.ini'))
