@@ -166,13 +166,15 @@ def RemoveWorkshop(dic, ch, pgnb=0):
     if Config.ShowMode == "2" or Config.ShowMode == "3":
         if Changement == 11:
             os.system("cls")
+            return ModifyYourInstance(refreshdic(),ch)
         elif Changement == 12:
             if pgnb != 0:
                 pgnb -= 1
             os.system("cls")
         elif Changement == 13:
-            if ((pgnb + 1) * 10) < len(StringToList(dic['Instance' + str(ch)][1])):
+            if ((pgnb + 1) * 10) < len(StringToList(dic['Instance' + str(ch)][1]))+len(StringToList(dic['Instance' + str(ch)][1]))%10:
                 pgnb += 1
+            print(((pgnb + 1) * 10) < len(StringToList(dic['Instance' + str(ch)][1]))+len(StringToList(dic['Instance' + str(ch)][1]))%10,pgnb)
             os.system("cls")
         elif 0 < Changement < 11:
             ListChangement = pageShow(pgnb, WorkshopList)[1]
@@ -237,7 +239,7 @@ def RemoveMods(dic, ch, pgnb=0):
                 pgnb -= 1
             os.system("cls")
         elif Changement == 13:
-            if ((pgnb + 1) * 10) < len(StringToList(dic['Instance' + str(ch)][2])):
+            if ((pgnb + 1) * 10) < len(StringToList(dic['Instance' + str(ch)][2]))+len(StringToList(dic['Instance' + str(ch)][2]))%10:
                 pgnb += 1
             os.system("cls")
         elif 0 < Changement < 11:
@@ -306,7 +308,7 @@ def AddMods(dic, ch, pgnb=0):
                 pgnb -= 1
             os.system("cls")
         elif Changement == 13:
-            if ((pgnb + 1) * 10) < len(StringToList(dic['Instance' + str(ch)][2])):
+            if ((pgnb + 1) * 10) < len(StringToList(",".join(direc).replace('.Disabled.', '')))+len(StringToList(",".join(direc).replace('.Disabled.', '')))%10:
                 pgnb += 1
             os.system("cls")
         elif 0 < Changement < 11:
@@ -370,7 +372,7 @@ def AddWorkshop(dic, ch, pgnb=0):
                 pgnb -= 1
             os.system("cls")
         elif Changement == 13:
-            if ((pgnb + 1) * 10) < len(StringToList(",".join(direc))):
+            if ((pgnb + 1) * 10) < len(StringToList(",".join(direc).replace('.Disabled.', '')))+len(StringToList(",".join(direc).replace('.Disabled.', '')))%10:
                 pgnb += 1
             os.system("cls")
         elif 0 < Changement < 11:
@@ -467,7 +469,7 @@ def CleanerConfig():
             while y < len(WorkshopList):
                 temp = WorkshopList[y]
                 if WorkshopList.count(temp) > 1 or (temp not in direc and temp!="None"):
-                    y = 0 #Restart from 0 if delete
+                    y = 0
                 else:
                     y = y + 1
                 for w in range(0, 2):
