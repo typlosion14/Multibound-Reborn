@@ -1,7 +1,7 @@
 from CobraLib import source_html
 
 
-def Collection(collectionid):  # 1357125616
+def Collection(collectionid):  # 1357125616 #Made by Leslie M. and reworked by my
     myStr = source_html("https://steamcommunity.com/sharedfiles/filedetails/?id=" + str(collectionid))
     id = []
     pos = 1
