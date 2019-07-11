@@ -467,7 +467,7 @@ def CleanerConfig():
             while y < len(WorkshopList):
                 temp = WorkshopList[y]
                 if WorkshopList.count(temp) > 1 or (temp not in direc and temp!="None"):
-                    y = 0
+                    y = 0 #Restart from 0 if delete
                 else:
                     y = y + 1
                 for w in range(0, 2):
