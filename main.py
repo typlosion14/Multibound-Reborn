@@ -35,7 +35,7 @@ def LoadingInstance():
     return ChooseYourInstance(dic)
 
 
-def InstanceAppli(ch, dic):
+def InstanceAppli(ch, dic): #Disable and Enable the mods
     InstanceLoad = dic['Instance' + str(ch)]
     Workshop = InstanceLoad[1].split(',')
     ModLoad = InstanceLoad[2].split(',')
