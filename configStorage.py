@@ -246,20 +246,22 @@ class Translate:
             return "Quit Starbound..."
 
 
-def init(): #Load Config.ini
+def init():
     config = cp.ConfigParser()
     try:
         config.read_file(open('config.ini'))
     except:
-        input(os.getcwd())
+        print("config.ini Not Found")
     Config.OriginPath = os.getcwd()
     Config.InstanceNumber = int(len(config.sections()[1:]))
     try:
         Config.Unstable = bool(config.get('OPTIONS', 'Unstable'))
     except:
         return Translate.UnstableBool()
-    if config.get('OPTIONS', 'Language') != "en" and config.get('OPTIONS', 'Language') in ("fr"):
+    if config.get('OPTIONS', 'Language') in ("fr","en"):
         Config.TranslateConfig = config.get('OPTIONS', 'Language')
+    if str(config.get('OPTIONS', 'editormode')) in ('1','2',"3"):
+        Config.ShowMode = str(config.get('OPTIONS', 'editormode'))
     try:
         SteamAppsPath = config.get('OPTIONS', 'SteamAppsPath')
         os.chdir(SteamAppsPath + "\\workshop\content\\211820")
