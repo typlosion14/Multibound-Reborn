@@ -1,6 +1,6 @@
 import configparser as cp
 import os
-
+import shutil
 from CobraLib import directSearch
 from configStorage import Config, Translate, init
 
@@ -35,7 +35,7 @@ def LoadingInstance():
     return ChooseYourInstance(dic)
 
 
-def InstanceAppli(ch, dic): #Disable and Enable the mods
+def InstanceAppli(ch, dic):
     InstanceLoad = dic['Instance' + str(ch)]
     Workshop = InstanceLoad[1].split(',')
     ModLoad = InstanceLoad[2].split(',')
@@ -43,25 +43,38 @@ def InstanceAppli(ch, dic): #Disable and Enable the mods
         direc = directSearch(Config.SteamAppsPath + "\\workshop\content\\211820")
         os.chdir(Config.SteamAppsPath + "\\workshop\content\\211820")
         for i in range(0, len(direc)):
+            if not direc[i].startswith("Disabled."):
+                VerifDirec=direc[i]
+                print(VerifDirec)
+                for y in range(0,len(direc)):
+                    if direc[y].startswith("Disabled.") and direc[y].endswith(VerifDirec):
+                        print(direc[y])
+                        shutil.rmtree(Config.SteamAppsPath + "\\workshop\content\\211820\\Disabled."+VerifDirec)
             if direc[i] not in Workshop and "Disabled." not in direc[i]:
                 os.rename(direc[i], "Disabled." + str(direc[i]))
         for i in range(0, len(Workshop)):
             if ("Disabled." + Workshop[i]) in direc:
                 os.rename("Disabled." + Workshop[i], Workshop[i])
     except:
-        return Translate.WorkshopError
+
+        return Translate.WorkshopError()
     try:
         direc = directSearch(Config.SteamAppsPath + "\\common\Starbound\mods")
         os.chdir(Config.SteamAppsPath + "\\common\Starbound\mods")
         for i in range(0, len(direc)):
+            if not direc[i].startswith(".Disabled."):
+                VerifDirec = direc[i]
+                for y in range(0, len(direc)):
+                    if direc[y].startswith(".Disabled.") and direc[y].endswith(VerifDirec):
+                        shutil.rmtree(Config.SteamAppsPath + "\\common\Starbound\mods\\.Disabled." + VerifDirec)
             if direc[i] not in ModLoad and "Disabled." not in direc[i]:
                 os.rename(direc[i], ".Disabled." + str(direc[i]))
         for i in range(0, len(ModLoad)):
             if (".Disabled." + ModLoad[i]) in direc:
                 os.rename(".Disabled." + ModLoad[i], ModLoad[i])
     except:
-        return Translate.ModError
-    os.system(Config.SteamAppsPath + '\\common\Starbound\win64\Starbound.exe')
+        return Translate.ModError()
+    os.system(Config.SteamAppsPath + '\\common\Starbound\win64\starbound.exe')
     return Translate.LaunchStarbound()
 
 
@@ -75,5 +88,5 @@ def ListeCreator(dic):
 print(init())
 inst = LoadingInstance()
 print(inst[0])
-InstanceAppli(inst[1], inst[2])
+print(InstanceAppli(inst[1], inst[2]))
 # Todo : Inteface Graphique avec Nom et Image
