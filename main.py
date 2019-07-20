@@ -48,7 +48,6 @@ def InstanceAppli(ch, dic):
                 print(VerifDirec)
                 for y in range(0,len(direc)):
                     if direc[y].startswith("Disabled.") and direc[y].endswith(VerifDirec):
-                        print(direc[y])
                         shutil.rmtree(Config.SteamAppsPath + "\\workshop\content\\211820\\Disabled."+VerifDirec)
             if direc[i] not in Workshop and "Disabled." not in direc[i]:
                 os.rename(direc[i], "Disabled." + str(direc[i]))
@@ -75,6 +74,18 @@ def InstanceAppli(ch, dic):
     except:
         return Translate.ModError()
     os.system(Config.SteamAppsPath + '\\common\Starbound\win64\starbound.exe')
+    direc = directSearch(Config.SteamAppsPath + "\\workshop\content\\211820")
+    os.chdir(Config.SteamAppsPath + "\\workshop\content\\211820")
+    for i in range(0, len(direc)):
+        if direc[i].startswith("Disabled."):
+            NewName=str(direc[i][direc[i].find('.')+1:])
+            os.rename(direc[i], NewName)
+    direc = directSearch(Config.SteamAppsPath + "\\common\Starbound\mods")
+    os.chdir(Config.SteamAppsPath + "\\common\Starbound\mods")
+    for i in range(0, len(direc)):
+        if direc[i].startswith(".Disabled."):
+            NewName=str(direc[i][direc[i].find('.Disabled.')+len(".Disabled."):])
+            os.rename(direc[i], NewName)
     return Translate.LaunchStarbound()
 
 
