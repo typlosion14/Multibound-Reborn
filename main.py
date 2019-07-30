@@ -73,7 +73,7 @@ def InstanceAppli(ch, dic):
                 os.rename(".Disabled." + ModLoad[i], ModLoad[i])
     except:
         return Translate.ModError()
-    os.system(Config.SteamAppsPath + '\\common\Starbound\win64\starbound.exe')
+    os.system('"'+Config.SteamAppsPath + '\\common\Starbound\win64\starbound.exe"')
     direc = directSearch(Config.SteamAppsPath + "\\workshop\content\\211820")
     os.chdir(Config.SteamAppsPath + "\\workshop\content\\211820")
     for i in range(0, len(direc)):
