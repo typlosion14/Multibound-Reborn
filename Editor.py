@@ -5,7 +5,6 @@ from libCollectionSteam import Collection
 from configStorage import Translate,Config,pageShow,init
 from CobraLib import *
 
-
 def CreateInstance():
     NameInstance = str(input(Translate.NameInstance()))
     if NameInstance == '' or NameInstance == 'None':
@@ -37,10 +36,57 @@ def ChoiceWhatToDo():
     elif ch == 4:
         os.system("cls")
         return CleanerConfig()
+    elif ch == 5:
+        os.system("cls")
+        return ImportInstance()
     else:
         os.system("cls")
         return ChoiceWhatToDo()
 
+def ImportInstance():
+    print(Translate.Import())
+    root = tk.Tk()
+    root.withdraw()
+    file_path = filedialog.askopenfilename()
+    if file_path.endswith("instance.json"):
+        ListWorkshop=[]
+        print(Translate.loading())
+        file1=open(file_path,"r")
+        data_instance=file1.read()
+        file1.close()
+        InstanceName=data_instance[data_instance.find('"name"')+len('"name"'):data_instance.find('",')]
+        InstanceName=InstanceName[InstanceName.find('"')+1:]
+        AssetSources=data_instance[data_instance.find('[')+1:data_instance.find('],')]
+        for i in range(0,AssetSources.count('"workshopId"')):
+            AssetSources=AssetSources[AssetSources.find('"workshopId"')+len('"workshopId"'):]
+            ModsID=AssetSources[AssetSources.find('"')+1:]
+            try:
+                ListWorkshop.append(int(ModsID[:ModsID.find('"')]))
+            except:
+                return Translate.ErrorMultiboundModsID()
+        init()
+        if '"blacklist"' in AssetSources:
+            direcList=directSearch(Config.SteamAppsPath + "\\workshop\content\\211820")
+            AssetSources = AssetSources[AssetSources.find('[') + 1:AssetSources.find(']')]
+            pos=AssetSources.find('"')
+            print(direcList)
+            for i in range(0,AssetSources.count('"')//2):
+                ModsID=AssetSources[AssetSources.find('"',pos)+1:AssetSources.find('"',AssetSources.find('"',pos)+1)]
+                print(ModsID)
+                pos=AssetSources.find('"',AssetSources.find('"',pos)+1)+1
+                if ModsID in direcList:
+                    direcList.remove(ModsID)
+            ListWorkshop=direcList
+        config = cp.ConfigParser()
+        config.read_file(open('config.ini'))
+
+        config['INSTANCE' + str(Config.InstanceNumber + 1)] = {'Name': InstanceName, 'modslist': 'None',
+                                                               'workshoplist': ListToString(ListWorkshop)}
+        Config.InstanceNumber = Config.InstanceNumber + 1
+        with open('config.ini', 'w') as settings:
+            config.write(settings)
+        print(Translate.ChangeDone())
+    return ChoiceWhatToDo()
 
 def ConfigFile():
     init()

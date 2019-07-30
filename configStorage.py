@@ -9,38 +9,52 @@ class Translate:
     def template(self=''):
         if Config.TranslateConfig == "fr":
             return
+        elif Config.TranslateConfig == "ru":
+            return
+        elif Config.TranslateConfig == "es":
+            return
+        elif Config.TranslateConfig == "jp":
+            return
         else:
             return
 
     def Cleaner(self=''):
         if Config.TranslateConfig == "fr":
             return "Voulez-vous nettoyer le fichier config ?\n1.Oui\n2.Non\n"
+        elif Config.TranslateConfig == "ru":
+            return "Вы хотите очистить файл конфигурации\n1.Да\n2.Нет\n"
         else:
-            return "Do you want to clean the config file?\n1.Oui\n2.None\n"
+            return "Do you want to clean the config file?\n1.Yes\n2.No\n"
 
     def ConfigFile(self=''):
         if Config.TranslateConfig == "fr":
             return "1.Changer la langue\n2.Changer le type d'affichage\n3.Changer le chemin de Starbound\n4.WIP\n5.Quitter\n"
+        elif Config.TranslateConfig == "ru":
+            return "1.изменить языка\n2.Изменить тип отображения\n3.Изменение Дорожка Starbound\n4.WIP\n5.Выход\n"
         else:
             return "1.Change language\n2.Change how to display mods\n3.Change Starbound's path\n4.WIP\n5.Leave\n"
 
     def NewLanguage(self=''):
         if Config.TranslateConfig == "fr":
-            return "Changer de Langue:'fr'=français,'en'=english\n"
+            return "Changer de Langue:'fr'=français,'en'=english,'ru'=русский\n"
+        elif Config.TranslateConfig == "ru":
+            return "изменить языка:'fr'=français,'en'=english,'ru'=русский\n"
         else:
-            return "Change language:'fr'=français,'en'=english\n"
+            return "Change language:'fr'=français,'en'=english,'ru'=русский\n"
 
     def ModeConfig(self=''):
         if Config.TranslateConfig == "fr":
             return "Changer le type d'affichage:\n1.Vous devez rentrer le WorkshopID de l'item que vous souhaitez ajouter\n2.Système de page montrant les WorkshopID disponibles\n3.Système de page montrant les noms des mods(Prends plus de temps a charger)\n"
+        elif Config.TranslateConfig == "ru":
+            return ""
         else:
             return "Change how to display mods:\n1.You need to enter the WorkshopID of the mod you want to add\n2.Systeme of page show you the WorkshopID available\n3.Système of page show you the name of the mods(Take more time to load)\n"
 
     def Choice(self=''):
         if Config.TranslateConfig == "fr":
-            return "Que voulez-vous faire?\n1.Modifier une instance\n2.En creez une nouvelle.\n3.Modifier le fichier config\n4.Nettoyez le fichier config\n"
+            return "Que voulez-vous faire?\n1.Modifier une instance\n2.En creez une nouvelle.\n3.Modifier le fichier config\n4.Nettoyez le fichier config\n5.Importer une instance de Multibound\n"
         else:
-            return "What you want to do?\n1.Modify a existed Instance\n2.Create a new one.\n3.Modify the config file\n4.Clean the config file\n"
+            return "What you want to do?\n1.Modify a existed Instance\n2.Create a new one.\n3.Modify the config file\n4.Clean the config file\n5.Import a instance from Multibound\n"
 
     def NameInstance(self=''):
         if Config.TranslateConfig == "fr":
@@ -126,7 +140,8 @@ class Translate:
         else:
             return "Here the mods:" + modsList + "\nWhat mod you want to remove (write '0' for all and '1' for leave)?\n"
 
-    def RemoveWorkshop2(modsList, pgnb):  # Delete Workshop Config 2
+    def RemoveWorkshop2(modsList, pgnb):  # Delete Workshop Config 2 et 3
+        print(Translate.loading())
         if Config.TranslateConfig == "fr":
             return "Quel Objet voulez-vous enlevez ?\n" + pageShow(pgnb, StringToList(modsList))[
                 0] + "11.Quitter\n12.Page Précédente\n13.Page Suivante\n"
@@ -134,7 +149,8 @@ class Translate:
             return "What object you want to remove ?\n" + pageShow(pgnb, StringToList(modsList))[
                 0] + "11.Leave\n12.Previous Page\n13.Next Page\n"
 
-    def RemoveMods2(modsList, pgnb):  # Remove Mods Config 2
+    def RemoveMods2(modsList, pgnb):  # Remove Mods Config 2 et 3
+        print(Translate.loading())
         if Config.TranslateConfig == "fr":
             return "Quel mod voulez-vous enlevez ?\n" + pageShow(pgnb, StringToList(modsList))[
                 0] + "11.Quitter\n12.Page Précédente\n13.Page Suivante\n"
@@ -142,7 +158,8 @@ class Translate:
             return "What mod you want to remove ?\n" + pageShow(pgnb, StringToList(modsList))[
                 0] + "11.Leave\n12.Previous Page\n13.Next Page\n"
 
-    def WorkshopMod1(WorkshopList, direc, pgnb):  # Add Workshop Config 2
+    def WorkshopMod1(WorkshopList, direc, pgnb):  # Add Workshop Config 2 et 3
+        print(Translate.loading())
         if Config.TranslateConfig == "fr":
             return "Voici les objets du Workshop:" + WorkshopList + "\nQuel Objet voulez-vous rajoutez ?\n" + \
                    pageShow(pgnb, StringToList(direc.replace('Disabled.', '')))[
@@ -152,7 +169,8 @@ class Translate:
                    pageShow(pgnb, StringToList(direc.replace('Disabled.', '')))[
                        0] + "11.Leave\n12.Previous Page\n13.Next Page\n"
 
-    def AddMods2(WorkshopList, direc, pgnb):  # Add Mods Config 2
+    def AddMods2(WorkshopList, direc, pgnb):  # Add Mods Config 2 et 3
+        print(Translate.loading())
         if Config.TranslateConfig == "fr":
             return "Voici les mods de la liste:" + WorkshopList + "\nQuel mod voulez-vous rajoutez ?\n" + \
                    pageShow(pgnb, StringToList(direc.replace('.Disabled.', '')))[
@@ -188,14 +206,23 @@ class Translate:
             return "You have load:" + InstanceName + "\nWorkshop list: " + Workshop + "\nMods list :" + ModLoad.replace(
                 'Disabled.',
                 '') + "\nWhat you want to do?\n1.Rename Instance\n2.Delete a mod in Workshop List\n3.Add a mod in Workshop List\n4.Delete a mod in Mods List\n5.Add a mod in Mods List\n6.Add a collection\n7.Delete a collection\n8.Change the selected Instance\n"
-
+    def Import(self=''):
+        if Config.TranslateConfig == "fr":
+            return "Selectionnez le instance.json de l'instance à import:\n"
+        else:
+            return "Choose the instance.json of the instance you want to import:\n"
+    def ErrorMultiboundModsID(self=''):
+        if Config.TranslateConfig =="fr":
+            return "Erreur dans le instance.json lié avec un workshopid, verifié que tous les workshopid sont bien des nombres.\n"
+        else:
+            return "Error in instance.json link with workshopid, verify if all workshopid are numbers.\n"
     # ^^^^^^^^Editor
     #               Mainvvvvvvvv
     def loading(self=''):
         if Config.TranslateConfig == "fr":
-            return "Chargement de votre Instance..."
+            return "Chargement ..."
         else:
-            return "Loading of your instance..."
+            return "Loading ..."
 
     def ChooseInstance(self=''):
         if Config.TranslateConfig == "fr":
