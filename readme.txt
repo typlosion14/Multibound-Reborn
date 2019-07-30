@@ -22,7 +22,7 @@
 	- Entrer '"pathtoStarbound/Multibound Reborn.exe" %command%', changez le 'pathtoStarbound' au chemin du fichier Multibound Reborn.exe
 	- Sauvegardez les changements et lancer le jeu.
 ## Scan Virus Total:
-- Editeur: https://www.virustotal.com/gui/file/1a003d3a9c21012c25fc29ea70e84f41d984f9f27602d4b9157f2c29597ea716/detection
+- Editeur: https://www.virustotal.com/gui/file/219ec3c8dbb1c513275e31e98454c47fcc010e5b0c45619456401302c15cc879/detection
 - Launcheur: https://www.virustotal.com/gui/file/bd155ed31dafb4a658291b9333edfcd8cb90706a92c7c11d3f121c2318f9cd1b/detection
 
 If you want to help me for my futur project, you can donate at:
