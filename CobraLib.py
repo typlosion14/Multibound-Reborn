@@ -1,6 +1,11 @@
 import os
 from urllib.request import urlopen, Request
 
+def download_file(url,file_name='download',path=os.getcwd()):
+    with urlopen(url) as response, open(path+"\\"+file_name, 'wb') as out_file:
+        data = response.read()  # a `bytes` object
+        out_file.write(data)
+    return
 
 def source_html(url):
     headers = {'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) '

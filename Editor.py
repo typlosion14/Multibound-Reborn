@@ -57,26 +57,37 @@ def ImportInstance():
         InstanceName=data_instance[data_instance.find('"name"')+len('"name"'):data_instance.find('",')]
         InstanceName=InstanceName[InstanceName.find('"')+1:]
         AssetSources=data_instance[data_instance.find('[')+1:data_instance.find('],')]
-        for i in range(0,AssetSources.count('"workshopId"')):
-            AssetSources=AssetSources[AssetSources.find('"workshopId"')+len('"workshopId"'):]
-            ModsID=AssetSources[AssetSources.find('"')+1:]
-            try:
-                ListWorkshop.append(int(ModsID[:ModsID.find('"')]))
-            except:
-                return Translate.ErrorMultiboundModsID()
+        if AssetSources.count('"workshopId"') != 0:
+            for i in range(0,AssetSources.count('"workshopId"')):
+                AssetSources=AssetSources[AssetSources.find('"workshopId"')+len('"workshopId"'):]
+                ModsID=AssetSources[AssetSources.find('"')+1:]
+                try:
+                    ListWorkshop.append(int(ModsID[:ModsID.find('"')]))
+                except:
+                    return Translate.ErrorMultiboundModsID()
+        if AssetSources.count('"id"') !=0:
+            AssetSources = data_instance[data_instance.find('[') + 1:data_instance.find('],')]
+            for i in range(0, AssetSources.count('"id"')):
+                AssetSources = AssetSources[AssetSources.find('"id"') + len('"id"'):]
+                ModsID = AssetSources[AssetSources.find('"') + 1:]
+                try:
+                    ListWorkshop.append(int(ModsID[:ModsID.find('"')]))
+                except:
+                    return Translate.ErrorMultiboundModsID()
         init()
-        if '"blacklist"' in AssetSources:
-            direcList=directSearch(Config.SteamAppsPath + "\\workshop\content\\211820")
-            AssetSources = AssetSources[AssetSources.find('[') + 1:AssetSources.find(']')]
-            pos=AssetSources.find('"')
-            print(direcList)
-            for i in range(0,AssetSources.count('"')//2):
-                ModsID=AssetSources[AssetSources.find('"',pos)+1:AssetSources.find('"',AssetSources.find('"',pos)+1)]
-                print(ModsID)
-                pos=AssetSources.find('"',AssetSources.find('"',pos)+1)+1
-                if ModsID in direcList:
-                    direcList.remove(ModsID)
-            ListWorkshop=direcList
+        if AssetSources.count('"blacklist"') !=0:
+            if '"blacklist"' in AssetSources:
+                direcList=directSearch(Config.SteamAppsPath + "\\workshop\content\\211820")
+                AssetSources = AssetSources[AssetSources.find('[') + 1:AssetSources.find(']')]
+                pos=AssetSources.find('"')
+                print(direcList)
+                for i in range(0,AssetSources.count('"')//2):
+                    ModsID=AssetSources[AssetSources.find('"',pos)+1:AssetSources.find('"',AssetSources.find('"',pos)+1)]
+                    print(ModsID)
+                    pos=AssetSources.find('"',AssetSources.find('"',pos)+1)+1
+                    if ModsID in direcList:
+                        direcList.remove(ModsID)
+                ListWorkshop=direcList
         config = cp.ConfigParser()
         config.read_file(open('config.ini'))
 

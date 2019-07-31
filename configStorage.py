@@ -271,7 +271,21 @@ class Translate:
             return "Fermeture de Starbound..."
         else:
             return "Quit Starbound..."
-
+    def NeedUpdate(self=""):
+        if Config.TranslateConfig == "fr":
+            return "Nouvelle version trouvée!\n"
+        else:
+            return "New Update found!\n"
+    def DownloadChoice(self=""):
+        if Config.TranslateConfig == "fr":
+            return "Voulez-vous la telechargez maintenant?\nTapez 1 pour Oui:\n"
+        else:
+            return "Do you want to download now the new update?\nType 1 for Yes:\n"
+    def PleaseInstall(self=""):
+        if Config.TranslateConfig == "fr":
+            return "Après la fermeture de cette fenetre, Decompressez l'archive (sauf config.ini)"
+        else:
+            return "After closing the window, uncompress the archive (without config.ini) "
 
 def init():
     config = cp.ConfigParser()
@@ -308,6 +322,7 @@ class Config:
     SteamAppsPath = "D:\SteamLibrary\steamapps"
     OriginPath = ".\\"
     ShowMode = "1"
+    Version = "1.2.1"
 
 
 def pageShow(pgnb, modsList):

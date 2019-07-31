@@ -1,7 +1,7 @@
 import configparser as cp
 import os
 import shutil
-from CobraLib import directSearch
+from CobraLib import directSearch,source_html,download_file
 from configStorage import Config, Translate, init
 
 
@@ -21,6 +21,28 @@ def ChooseYourInstance(dic):
     except:
         return ChooseYourInstance(dic)
 
+def CheckUpdate():
+    DicGit=source_html("https://api.github.com/repos/typlosion14/Multibound-Reborn/releases/latest")[2:]
+    VersionGit=DicGit[DicGit.find('"tag_name": "')+len('"tag_name": "'):DicGit.find('"',DicGit.find('"tag_name": "')+len('"tag_name": " '))]
+    config = cp.ConfigParser()
+    config.read_file(open('config.ini'))
+    ActualVersion=Config.Version
+    if ActualVersion[0]<VersionGit[0] or ActualVersion[2]<VersionGit[2] or ActualVersion[4]<VersionGit[4]:
+        print(Translate.NeedUpdate())
+        try:
+            ch=int(input(Translate.DownloadChoice()))
+        except:
+            return
+        if ch==1:
+            UrlGit = DicGit[DicGit.find('"browser_download_url": "') + len('"browser_download_url": "'):DicGit.find('"',
+                                                                                                                    DicGit.find(
+                                                                                                                        '"browser_download_url": "') + len(
+                                                                                                                        '"browser_download_url": " '))]
+            print(Translate.loading())
+            download_file(UrlGit,"Multibound Reborn.rar")
+            input(Translate.PleaseInstall())
+            exit()
+    return
 
 def LoadingInstance():
     config = cp.ConfigParser()
@@ -95,7 +117,7 @@ def ListeCreator(dic):
         AllName.append(dic['Instance' + str(i + 1)][0])
     return AllName
 
-
+CheckUpdate()
 print(init())
 inst = LoadingInstance()
 print(inst[0])
