@@ -8,7 +8,7 @@
 2. Set Launch Options
 	- Right-click on Starbound under the Library in Steam and select Properties.
 	- Under the General tab click the Set launch options... button.
-	- Enter the launch options '"pathtoStarbound/Multibound Reborn.exe" %command%', change the 'pathtoStarbound' with the path to Multibound Reborn.exe
+	- Enter the launch options (with the quote on the path) "pathtoStarbound/Multibound Reborn.exe" %command%, change the 'pathtoStarbound' with the path to Multibound Reborn.exe
 	- Close the game's Properties window and launch the game.
 ## Install Tutoriel FR:
 1. Allez au fichier de Starbound
@@ -19,7 +19,7 @@
 2. Changez les options de lancement
 	- Clique droit sur Starbound dans la bibliotheque steam and choissisez Proprietes.
 	- Dans l'onglet General cliquez sur Definir les options de lancement...
-	- Entrer '"pathtoStarbound/Multibound Reborn.exe" %command%', changez le 'pathtoStarbound' au chemin du fichier Multibound Reborn.exe
+	- Entrer (avec les ") "pathtoStarbound/Multibound Reborn.exe" %command%, changez le 'pathtoStarbound' au chemin du fichier Multibound Reborn.exe
 	- Sauvegardez les changements et lancer le jeu.
 ## Scan Virus Total:
 - Editeur: https://www.virustotal.com/gui/file/808ae54e163e309e34079f2011a8b9db6b29654a3ddbb5ae7e4e56952d37deef/detection
