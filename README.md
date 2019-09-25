@@ -26,7 +26,6 @@
 - Launcheur: https://www.virustotal.com/gui/file/ba53395c53b8e5dc21104ecd0004b4e2ce4d729f8e69b409f125812ff2a87332/detection
 
 If you want to help me for my futur project, you can donate at:
-paypal.me/Typlosion
 patreon.com/Typlosion
 
 Thanks for downloading and have fun!
