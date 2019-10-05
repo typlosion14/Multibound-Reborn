@@ -1,19 +1,20 @@
 import configparser as cp
+import webbrowser
 import os
+import json
 import shutil
-from CobraLib import directSearch,source_html,download_file
+from CobraLib import directSearch,importjson
 from configStorage import Config, Translate, init
 
 
 def ChooseYourInstance(dic):
     try:
-        print(Translate.ChooseInstance())
         for i in range(0, len(dic)):
             print(str(i + 1) + " " + dic['Instance' + str(i + 1)][0])
     except:
         return Translate.ErrorInstance()
     try:
-        choice = int(input(Translate.ChooseInstance()))
+        choice = int(input(Translate.ChooseInstanceMain()))
         if choice not in range(1, len(dic) + 1):
             return ChooseYourInstance(dic)
         else:
@@ -22,27 +23,24 @@ def ChooseYourInstance(dic):
         return ChooseYourInstance(dic)
 
 def CheckUpdate():
-    DicGit=source_html("https://api.github.com/repos/typlosion14/Multibound-Reborn/releases/latest")[2:]
-    VersionGit=DicGit[DicGit.find('"tag_name": "')+len('"tag_name": "'):DicGit.find('"',DicGit.find('"tag_name": "')+len('"tag_name": " '))]
+    DicGit=json.loads(importjson("https://api.github.com/repos/typlosion14/Multibound-Reborn/releases/latest",""))
+    VersionGit=DicGit['tag_name']
     config = cp.ConfigParser()
     config.read_file(open('config.ini'))
     ActualVersion=Config.Version
-    if ActualVersion[0]<VersionGit[0] or ActualVersion[2]<VersionGit[2] or ActualVersion[4]<VersionGit[4]:
+    if ActualVersion!=VersionGit and ActualVersion[0]<=VersionGit[0] and ActualVersion[2]<=VersionGit[2] and ActualVersion[4]<=VersionGit[4]:
         print(Translate.NeedUpdate())
         try:
             ch=int(input(Translate.DownloadChoice()))
         except:
             return
         if ch==1:
-            UrlGit = DicGit[DicGit.find('"browser_download_url": "') + len('"browser_download_url": "'):DicGit.find('"',
-                                                                                                                    DicGit.find(
-                                                                                                                        '"browser_download_url": "') + len(
-                                                                                                                        '"browser_download_url": " '))]
+            UrlGit = DicGit['assets']['browser_download_url']
             print(Translate.loading())
-            download_file(UrlGit,"Multibound Reborn.rar")
+            webbrowser.open_new(UrlGit)
             input(Translate.PleaseInstall())
             exit()
-    return
+    return Translate.NoUpdateFound()
 
 def LoadingInstance():
     config = cp.ConfigParser()
@@ -50,8 +48,12 @@ def LoadingInstance():
     dic = {}
     try:
         for i in range(0, Config.InstanceNumber):
-            dic['Instance' + str(i + 1)] = config.get('INSTANCE' + str(i + 1), 'Name'), config.get(
-                'INSTANCE' + str(i + 1), 'workshoplist'), config.get('INSTANCE' + str(i + 1), 'ModsList')
+            try:
+                dic['Instance' + str(i + 1)] = config.get('INSTANCE' + str(i + 1), 'Name'), config.get(
+                'INSTANCE' + str(i + 1), 'workshoplist'), config.get('INSTANCE' + str(i + 1), 'ModsList'),config.get('INSTANCE' + str(i + 1), 'saveLocation')
+            except:
+                dic['Instance' + str(i + 1)] = config.get('INSTANCE' + str(i + 1), 'Name'), config.get(
+                    'INSTANCE' + str(i + 1), 'workshoplist'), config.get('INSTANCE' + str(i + 1),'ModsList'), 'default'
     except:
         return Translate.ErrorInstance()
     return ChooseYourInstance(dic)
@@ -61,7 +63,8 @@ def InstanceAppli(ch, dic):
     InstanceLoad = dic['Instance' + str(ch)]
     Workshop = InstanceLoad[1].split(',')
     ModLoad = InstanceLoad[2].split(',')
-    try:
+    saveLocation = InstanceLoad[3]
+    try: #Changer les mods du workshop
         direc = directSearch(Config.SteamAppsPath + "\\workshop\content\\211820")
         os.chdir(Config.SteamAppsPath + "\\workshop\content\\211820")
         for i in range(0, len(direc)):
@@ -79,7 +82,7 @@ def InstanceAppli(ch, dic):
     except:
 
         return Translate.WorkshopError()
-    try:
+    try: #changer les mods
         direc = directSearch(Config.SteamAppsPath + "\\common\Starbound\mods")
         os.chdir(Config.SteamAppsPath + "\\common\Starbound\mods")
         for i in range(0, len(direc)):
@@ -95,7 +98,19 @@ def InstanceAppli(ch, dic):
                 os.rename(".Disabled." + ModLoad[i], ModLoad[i])
     except:
         return Translate.ModError()
-    os.system('"'+Config.SteamAppsPath + '\\common\Starbound\win64\starbound.exe"')
+    if saveLocation!="default":
+        try:
+            os.makedirs(Config.SteamAppsPath + "\\common\Starbound\InstanceSave\\"+str(ch))
+        except:
+            print('Save found!')
+        try:
+            os.replace(Config.SteamAppsPath + "\\common\Starbound\\storage",Config.SteamAppsPath + "\\common\Starbound\InstanceSave\\storage")
+            os.replace(Config.SteamAppsPath + "\\common\Starbound\InstanceSave\\"+str(ch),Config.SteamAppsPath + "\\common\Starbound\\storage")
+        except:
+            return Translate.BugMoveFile()
+    print(Translate.LaunchStarbound())
+    os.system('"'+Config.SteamAppsPath + '\\common\Starbound\win64\starbound.exe"')#Lance le jeu
+    #Annule les changements
     direc = directSearch(Config.SteamAppsPath + "\\workshop\content\\211820")
     os.chdir(Config.SteamAppsPath + "\\workshop\content\\211820")
     for i in range(0, len(direc)):
@@ -108,7 +123,11 @@ def InstanceAppli(ch, dic):
         if direc[i].startswith(".Disabled."):
             NewName=str(direc[i][direc[i].find('.Disabled.')+len(".Disabled."):])
             os.rename(direc[i], NewName)
-    return Translate.LaunchStarbound()
+    #SaveLocation
+    if saveLocation!="default":
+        os.replace(Config.SteamAppsPath + "\\common\Starbound\\storage",Config.SteamAppsPath + "\\common\Starbound\InstanceSave\\"+str(ch))
+        os.replace(Config.SteamAppsPath + "\\common\Starbound\InstanceSave\\storage",Config.SteamAppsPath + "\\common\Starbound\\storage")
+    return "See you later!"
 
 
 def ListeCreator(dic):

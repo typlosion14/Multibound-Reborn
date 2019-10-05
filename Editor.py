@@ -1,9 +1,41 @@
 import configparser as cp
+import json
 import tkinter as tk
 from tkinter import filedialog
 from libCollectionSteam import Collection
 from configStorage import Translate,Config,pageShow,init
-from CobraLib import *
+from CobraLib import directSearch,os,StringToList,ListToString
+
+def savelocation(dic,ch):
+    ConfigSaveLocation = dic['Instance' + str(ch)][3]
+    try:
+        choice = int(input(Translate.saveLocation(ConfigSaveLocation)))
+    except:
+        return savelocation(dic,ch)
+    if choice==1:
+        config = cp.ConfigParser()
+        config.read_file(open('config.ini'))
+        if ConfigSaveLocation == 'default':
+            config.set('Instance' + str(ch), "savelocation", "instance")
+        else:
+            config.set('Instance' + str(ch), "savelocation", "default")
+        with open('config.ini', 'w') as settings:
+            config.write(settings)
+    else:
+        return ModifyYourInstance(refreshdic(), ch)
+
+
+
+def deletethis(json):
+    for i in range(json.count(' //')):
+        jsonpart1=json[:json.find(' //')-2]
+        jsonpart2=json[json.find('\n',json.find(' //'))+1:]
+        json=jsonpart1+jsonpart2
+    verif=json[json.find(']\n'):]
+    if '}' in verif:
+        return (json).replace('workshopId','id')
+    else:
+        return (json+'}').replace('workshopId', 'id')
 
 def CreateInstance():
     NameInstance = str(input(Translate.NameInstance()))
@@ -12,7 +44,7 @@ def CreateInstance():
     config = cp.ConfigParser()
     config.read_file(open('config.ini'))
     config['INSTANCE' + str(Config.InstanceNumber + 1)] = {'Name': NameInstance, 'modslist': 'None',
-                                                           'workshoplist': 'None'}
+                                                           'workshoplist': 'None','saveLocation':'default'}
     Config.InstanceNumber = Config.InstanceNumber + 1
     with open('config.ini', 'w') as settings:
         config.write(settings)
@@ -52,47 +84,38 @@ def ImportInstance():
         ListWorkshop=[]
         print(Translate.loading())
         file1=open(file_path,"r")
-        data_instance=file1.read()
+        data=file1.read()
         file1.close()
-        InstanceName=data_instance[data_instance.find('"name"')+len('"name"'):data_instance.find('",')]
-        InstanceName=InstanceName[InstanceName.find('"')+1:]
-        AssetSources=data_instance[data_instance.find('[')+1:data_instance.find('],')]
-        if AssetSources.count('"workshopId"') != 0:
-            for i in range(0,AssetSources.count('"workshopId"')):
-                AssetSources=AssetSources[AssetSources.find('"workshopId"')+len('"workshopId"'):]
-                ModsID=AssetSources[AssetSources.find('"')+1:]
+        print(deletethis(data))
+        data_instance = json.loads(deletethis(data))
+        InstanceName=data_instance['info']['name']
+        AssetSources=data_instance['assetSources']
+        if 'inst' in type(AssetSources[len(AssetSources)-1]):
+            InstanceSave='instance'
+        else:
+            InstanceSave='default'
+        if 'blacklist' in AssetSources[0]:
+            direcList = directSearch(Config.SteamAppsPath + "\\workshop\content\\211820")
+            blacklist = AssetSources[0]['blacklist']
+            for i in range(len(blacklist)):
+                if blacklist[i] in direcList:
+                    direcList.remove(str(blacklist[i]))
+            ListWorkshop = direcList
+        else:
+            for i in range(len(AssetSources)):
                 try:
-                    ListWorkshop.append(int(ModsID[:ModsID.find('"')]))
-                except:
-                    return Translate.ErrorMultiboundModsID()
-        if AssetSources.count('"id"') !=0:
-            AssetSources = data_instance[data_instance.find('[') + 1:data_instance.find('],')]
-            for i in range(0, AssetSources.count('"id"')):
-                AssetSources = AssetSources[AssetSources.find('"id"') + len('"id"'):]
-                ModsID = AssetSources[AssetSources.find('"') + 1:]
-                try:
-                    ListWorkshop.append(int(ModsID[:ModsID.find('"')]))
+                    if type(AssetSources[i])==dict:
+                        ModsID = AssetSources[i]['id']
+                        print(ModsID)
+                        ListWorkshop.append(int(ModsID))
                 except:
                     return Translate.ErrorMultiboundModsID()
         init()
-        if AssetSources.count('"blacklist"') !=0:
-            if '"blacklist"' in AssetSources:
-                direcList=directSearch(Config.SteamAppsPath + "\\workshop\content\\211820")
-                AssetSources = AssetSources[AssetSources.find('[') + 1:AssetSources.find(']')]
-                pos=AssetSources.find('"')
-                print(direcList)
-                for i in range(0,AssetSources.count('"')//2):
-                    ModsID=AssetSources[AssetSources.find('"',pos)+1:AssetSources.find('"',AssetSources.find('"',pos)+1)]
-                    print(ModsID)
-                    pos=AssetSources.find('"',AssetSources.find('"',pos)+1)+1
-                    if ModsID in direcList:
-                        direcList.remove(ModsID)
-                ListWorkshop=direcList
         config = cp.ConfigParser()
         config.read_file(open('config.ini'))
 
         config['INSTANCE' + str(Config.InstanceNumber + 1)] = {'Name': InstanceName, 'modslist': 'None',
-                                                               'workshoplist': ListToString(ListWorkshop)}
+                                                               'workshoplist': ListToString(ListWorkshop),'saveLocation':InstanceSave}
         Config.InstanceNumber = Config.InstanceNumber + 1
         with open('config.ini', 'w') as settings:
             config.write(settings)
@@ -121,7 +144,7 @@ def ConfigFile():
         os.system("cls")
         print(Translate.ChangeDone())
         return ConfigFile()
-    if choice == 2:  # ModeConfig()
+    elif choice == 2:  # ModeConfig()
         try:
             choice = int(input(Translate.ModeConfig()))
         except:
@@ -136,7 +159,7 @@ def ConfigFile():
         os.system("cls")
         print(Translate.ChangeDone())
         return ConfigFile()
-    if choice == 3:  # PathFinder()
+    elif choice == 3:  # PathFinder()
         root = tk.Tk()
         root.withdraw()
         file_path = filedialog.askopenfilename()
@@ -153,13 +176,13 @@ def ConfigFile():
             os.system("cls")
             print(Translate.ChangeDone())
             return ConfigFile()
-    if choice == 4:  # unstableChoice
+    elif choice == 4:  # unstableChoice
         print("WIP")  # todo unstable
         return ConfigFile()
-    if choice == 5:
+    elif choice == 5:
         return ChoiceWhatToDo()
     else:
-        ConfigFile()
+        return ConfigFile()
 
 
 def refreshdic():
@@ -168,8 +191,12 @@ def refreshdic():
     dic = {}
     try:
         for i in range(0, Config.InstanceNumber):
-            dic['Instance' + str(i + 1)] = config.get('INSTANCE' + str(i + 1), 'Name'), config.get(
-                'INSTANCE' + str(i + 1), 'workshoplist'), config.get('INSTANCE' + str(i + 1), 'ModsList')
+            try:
+                dic['Instance' + str(i + 1)] = config.get('INSTANCE' + str(i + 1), 'Name'), config.get(
+                'INSTANCE' + str(i + 1), 'workshoplist'), config.get('INSTANCE' + str(i + 1), 'ModsList'),config.get('INSTANCE' + str(i + 1), 'saveLocation')
+            except:
+                dic['Instance' + str(i + 1)] = config.get('INSTANCE' + str(i + 1), 'Name'), config.get(
+                    'INSTANCE' + str(i + 1), 'workshoplist'), config.get('INSTANCE' + str(i + 1),'ModsList'), 'default'
     except:
         return Translate.ErrorInstance()
     return dic
@@ -181,8 +208,12 @@ def LoadingInstance():
     dic = {}
     try:
         for i in range(0, Config.InstanceNumber):
-            dic['Instance' + str(i + 1)] = config.get('INSTANCE' + str(i + 1), 'Name'), config.get(
-                'INSTANCE' + str(i + 1), 'workshoplist'), config.get('INSTANCE' + str(i + 1), 'ModsList')
+            try:
+                dic['Instance' + str(i + 1)] = config.get('INSTANCE' + str(i + 1), 'Name'), config.get(
+                'INSTANCE' + str(i + 1), 'workshoplist'), config.get('INSTANCE' + str(i + 1), 'ModsList'),config.get('INSTANCE' + str(i + 1), 'saveLocation')
+            except:
+                dic['Instance' + str(i + 1)] = config.get('INSTANCE' + str(i + 1), 'Name'), config.get(
+                    'INSTANCE' + str(i + 1), 'workshoplist'), config.get('INSTANCE' + str(i + 1),'ModsList'), 'default'
     except:
         return Translate.ErrorInstance()
     return ChooseYourInstance(dic)
@@ -601,6 +632,9 @@ def ModifyYourInstance(dic, ch):
         os.system("cls")
         return CollectionManipulate(dic, ch, False)
     elif choice == 8:
+        os.system("cls")
+        return savelocation(dic,ch)
+    elif choice == 9:
         os.system("cls")
         return ChooseYourInstance(dic)
     else:

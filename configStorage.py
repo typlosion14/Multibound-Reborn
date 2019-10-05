@@ -52,9 +52,9 @@ class Translate:
 
     def Choice(self=''):
         if Config.TranslateConfig == "fr":
-            return "Que voulez-vous faire?\n1.Modifier une instance\n2.En creez une nouvelle.\n3.Modifier le fichier config\n4.Nettoyez le fichier config\n5.Importer une instance de Multibound\n"
+            return "Multibound Reborn a été crée par Typlosion14 en s'inspirant de l'idée de zetaPrime\nSi vous avez besoin d'aide ajoutez moi sur discord:Typlosion#7189\nQue voulez-vous faire?\n1.Modifier une instance\n2.En creez une nouvelle.\n3.Modifier le fichier config\n4.Nettoyez le fichier config\n5.Importer une instance de Multibound\n"
         else:
-            return "What you want to do?\n1.Modify a existed Instance\n2.Create a new one.\n3.Modify the config file\n4.Clean the config file\n5.Import a instance from Multibound\n"
+            return "Multibound Reborn has been created by Typlosion14 from the original idea by zetaPrime\nIf you want help, add me on discord:Typlosion#7189\nWhat you want to do?\n1.Modify a existed Instance\n2.Create a new one.\n3.Modify the config file\n4.Clean the config file\n5.Import a instance from Multibound\n"
 
     def NameInstance(self=''):
         if Config.TranslateConfig == "fr":
@@ -201,11 +201,11 @@ class Translate:
         if Config.TranslateConfig == "fr":
             return "Vous avez chargez l'instance:" + InstanceName + "\nLes mods du Workshop sont " + Workshop + "\nLes mods sont " + ModLoad.replace(
                 'Disabled.',
-                '') + "\nQue voulez-vous faire?\n1.Renommer l'instance\n2.Supprimez un mod de la liste du Workshop\n3.Rajouter un mod à la liste du Workshop\n4.Supprimez un mod de la liste des mods\n5.Rajouter un mod à la liste des Mods\n6.Rajouter une collection\n7.Supprimer une collection\n8.Changez d'instance\n"
+                '') + "\nQue voulez-vous faire?\n1.Renommer l'instance\n2.Supprimez un mod de la liste du Workshop\n3.Rajouter un mod à la liste du Workshop\n4.Supprimez un mod de la liste des mods\n5.Rajouter un mod à la liste des Mods\n6.Rajouter une collection\n7.Supprimer une collection\n8.Changez la position des sauvegardes\n9.Changez d'instance\n"
         else:
             return "You have load:" + InstanceName + "\nWorkshop list: " + Workshop + "\nMods list :" + ModLoad.replace(
                 'Disabled.',
-                '') + "\nWhat you want to do?\n1.Rename Instance\n2.Delete a mod in Workshop List\n3.Add a mod in Workshop List\n4.Delete a mod in Mods List\n5.Add a mod in Mods List\n6.Add a collection\n7.Delete a collection\n8.Change the selected Instance\n"
+                '') + "\nWhat you want to do?\n1.Rename Instance\n2.Delete a mod in Workshop List\n3.Add a mod in Workshop List\n4.Delete a mod in Mods List\n5.Add a mod in Mods List\n6.Add a collection\n7.Delete a collection\n8.Change the save location\n9.Change the selected Instance\n"
     def Import(self=''):
         if Config.TranslateConfig == "fr":
             return "Selectionnez le instance.json de l'instance à import:\n"
@@ -216,6 +216,18 @@ class Translate:
             return "Erreur dans le instance.json lié avec un workshopid, verifié que tous les workshopid sont bien des nombres.\n"
         else:
             return "Error in instance.json link with workshopid, verify if all workshopid are numbers.\n"
+    def saveLocation(location):
+        if location=='default':
+            if Config.TranslateConfig == "fr":
+                return "Les sauvegardes de cette instance sont dans les saves de Starbound\nVoulez-vous changer pour quelles soit à part?\n1.Oui\n2.Non"
+            else:
+                return "Your instance's save is in the default save location of your Starbound\nDo you want to the instance's save be separate from your other save?\n1.Yes\n2.No"
+        else:
+            if Config.TranslateConfig == "fr":
+                return "Les sauvegardes de cette instance sont à part\nVoulez-vous qu'elles soient remise avec les saves de Starbound?\n1.Oui\n2.Non\n"
+            else:
+                return "The instance's save is separate from your other save\nDo you want them to return to their default position?\n1.Yes\n2.No\n"
+
     # ^^^^^^^^Editor
     #               Mainvvvvvvvv
     def loading(self=''):
@@ -223,36 +235,6 @@ class Translate:
             return "Chargement ..."
         else:
             return "Loading ..."
-
-    def ChooseInstance(self=''):
-        if Config.TranslateConfig == "fr":
-            return "Choissisez l'instance que vous souhaitez:"
-        else:
-            return "Choose your instance:"
-
-    def UnstableBool(self=''):
-        if Config.TranslateConfig == "fr":
-            return 'Il y a un problème dans config.ini avec "Unstable"\nVeuillez entrer "False" ou "True".'
-        else:
-            return 'Problem in config.ini with "Unstable"\nPlease enter "False" or "True".'
-
-    def SteamAppsPath(self=''):
-        if Config.TranslateConfig == "fr":
-            return "Il y a un problème dans config.ini avec 'SteamAppsPath'\nVeuillez verifier que le chemin amene bien vers workshop et common.\nSi cela ne fonctionne toujours place essayer 2\\ au lieu d'un seul."
-        else:
-            return "Problem in config.ini with 'SteamAppsPath'\nPlease check if in the path we have the repertories 'workshop' and 'common'.\nIf that's doesn't work try replace one \\ with two."
-
-    def SuccessfulLoading(self=''):
-        if Config.TranslateConfig == "fr":
-            return "Chargement terminé avec succès!"
-        else:
-            return "Loading successfully completed!"
-
-    def ErrorInstance(self=''):
-        if Config.TranslateConfig == "fr":
-            return 'Il y a un problème dans config.ini lié aux instances.\nVerifié si vos instances sont crées avec la forme: \n[INSTANCE1]\nWorshopList = 211,277\nModsList=None\nAussi si vous ne voulez pas charger de mods,écrivez "None" au lieu de rien.'
-        else:
-            return "Problem in config.ini link with instance.\nCheck if instance are created in this form: \n[INSTANCE1]\nWorshopList = 211,277\nModsList=None\nAlso if you don't want to load mod write 'None' and not nothing."
 
     def WorkshopError(self=''):
         if Config.TranslateConfig == "fr":
@@ -265,8 +247,22 @@ class Translate:
             return "Un problème a eu lieu lors de la modification des fichiers des Mods."
         else:
             return "Problem when trying to modify Mods files."
-
     def LaunchStarbound(self=''):
+        if Config.TranslateConfig == "fr":
+            return """
+            Ouverture de Starbound, ne fermez pas cette fenetre sinon vous devrez vous même redeplacer tous les mods et les saves!!!
+            Ouverture de Starbound, ne fermez pas cette fenetre sinon vous devrez vous même redeplacer tous les mods et les saves!!!
+            Ouverture de Starbound, ne fermez pas cette fenetre sinon vous devrez vous même redeplacer tous les mods et les saves!!!
+            Ouverture de Starbound, ne fermez pas cette fenetre sinon vous devrez vous même redeplacer tous les mods et les saves!!!
+            """
+        else:
+            return """
+            Starbound opening, don't close this windows or you will need to move all mods and your save manually!!!
+            Starbound opening, don't close this windows or you will need to move all mods and your save manually!!!
+            Starbound opening, don't close this windows or you will need to move all mods and your save manually!!!
+            Starbound opening, don't close this windows or you will need to move all mods and your save manually!!!
+                        """
+    def QuitStarbound(self=''):
         if Config.TranslateConfig == "fr":
             return "Fermeture de Starbound..."
         else:
@@ -286,6 +282,23 @@ class Translate:
             return "Après la fermeture de cette fenetre, Decompressez l'archive (sauf config.ini)"
         else:
             return "After closing the window, uncompress the archive (without config.ini) "
+    def ChooseInstanceMain(self=''):
+        if Config.TranslateConfig == "fr":
+            return "Choissisez l'instance que vous souhaitez:"
+        else:
+            return "Choose instance you want to use:"
+
+    def BugMoveFile(self=''):
+        if Config.TranslateConfig == "fr":
+            return "Il y a un problème quand le logiciel a essayé de deplacer votre sauvegarde, verifiez qu'il n'y a pas de dossier 'storage' dans InstanceSave"
+        else:
+            return "Problem when trying to move your save file, check if 'storage' don't is in InstanceSave:"
+
+    def NoUpdateFound(self=''):
+        if Config.TranslateConfig == "fr":
+            return "Votre version est à jour!"
+        else:
+            return "No Update Found!"
 
 def init():
     config = cp.ConfigParser()
@@ -322,7 +335,7 @@ class Config:
     SteamAppsPath = "D:\SteamLibrary\steamapps"
     OriginPath = ".\\"
     ShowMode = "1"
-    Version = "1.2.1"
+    Version = "1.3.0"
 
 
 def pageShow(pgnb, modsList):
