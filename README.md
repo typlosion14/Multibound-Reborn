@@ -23,7 +23,7 @@
 	- Sauvegardez les changements et lancer le jeu.
 ## Scan Virus Total:
 - Editeur: https://www.virustotal.com/gui/file/24a718f29ba383cad88d56c9ae794721e449b3956a3333587e5f47794034b589/detection
-- Launcheur: https://www.virustotal.com/gui/file/a69a65e333d9bad9094142e3872063323224e495a627665e0e1f5c731e97c00e/detection
+- Launcheur: https://www.virustotal.com/gui/file/814c80e906ce1b983e11d33e73ea672c3f995e40668a1de61d42993a21115d26/detection
 If you want to help me for my futur project, you can donate at:
 patreon.com/Typlosion
 
