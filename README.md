@@ -23,7 +23,7 @@
 	- Sauvegardez les changements et lancer le jeu.
 ## Scan Virus Total:
 - Editeur: https://www.virustotal.com/gui/file/601d030ad83d61c20b4071431209e84ca35c439b0cf4bb52cfe707fe0ddbedaa/detection
-- Launcheur: https://www.virustotal.com/gui/file/01f24f2f3d75963832b5770f9be2c250e66d863e3f0dc6763a4d65741380cf89/detection
+- Launcheur: https://www.virustotal.com/gui/file/92c3095b20235d9c158bc8630af83c2a78a8b4f9ece073b838fa4bbb0abbd040/detection
 - Le programme manipule les fichiers, ils les deplacent et les renommes, cela explique la note VirusTotal le code étant sur GitHub, vous pouvez verifier vous-même.
 - The program manipulates the files, they move them and rename them, that explains the Virustotal score, the code being on Github, you can check it yourself.
 
