@@ -16,13 +16,26 @@ def savelocation(dic,ch):
         config = cp.ConfigParser()
         config.read_file(open('config.ini'))
         if ConfigSaveLocation == 'default':
-            config.set('Instance' + str(ch), "savelocation", "instance")
+            config.set('INSTANCE' + str(ch), "savelocation", "instance")
         else:
-            config.set('Instance' + str(ch), "savelocation", "default")
+            SaveList='player','universe'
+            for i in range(len(SaveList)):
+                if "." in SaveList[i]:
+                    os.replace(Config.SteamAppsPath + "\\common\Starbound\\InstanceSave\\"+ str(ch)+"\\"+SaveList[i],Config.SteamAppsPath + "\\common\Starbound\\storage\\"+SaveList[i])
+                else:
+                    SaveList2=os.listdir(Config.SteamAppsPath + "\\common\Starbound\\InstanceSave\\"+ str(ch)+"\\"+SaveList[i])
+                    for y in range(len(SaveList2)):
+                        os.replace(
+                            Config.SteamAppsPath + "\\common\Starbound\\InstanceSave\\" + str(ch) + "\\" + SaveList[i]+"\\"+SaveList2[y],
+                            Config.SteamAppsPath + "\\common\Starbound\\storage\\" + SaveList[i]+"\\"+SaveList2[y])
+            try:
+                os.remove(Config.SteamAppsPath + "\\common\Starbound\\InstanceSave\\" + str(ch))
+            except:
+                print("Can't delete "+Config.SteamAppsPath + "\\common\Starbound\\InstanceSave\\" + str(ch)+'\nNot a problem, continue...')
+            config.set('INSTANCE' + str(ch), "savelocation", "default")
         with open('config.ini', 'w') as settings:
             config.write(settings)
-    else:
-        return ModifyYourInstance(refreshdic(), ch)
+    return ModifyYourInstance(refreshdic(), ch)
 
 
 

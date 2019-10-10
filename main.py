@@ -23,7 +23,7 @@ def ChooseYourInstance(dic):
         return ChooseYourInstance(dic)
 
 def CheckUpdate():
-    DicGit=json.loads(importjson("https://api.github.com/repos/typlosion14/Multibound-Reborn/releases/latest",""))
+    DicGit=json.loads(importjson("https://api.github.com/repos/typlosion14/Multibound-Reborn/releases/latest","77a0b70044d0f39e64f08097a21f5a750d5b1323 "))
     VersionGit=DicGit['tag_name']
     config = cp.ConfigParser()
     config.read_file(open('config.ini'))
