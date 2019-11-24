@@ -4,7 +4,7 @@ import tkinter as tk
 from tkinter import filedialog
 from libCollectionSteam import Collection
 from configStorage import Translate,Config,pageShow,init
-from CobraLib import directSearch,os,StringToList,ListToString
+from CobraLib import directSearch,os,StringToList,ListToString,pakSearch
 
 def savelocation(dic,ch):
     ConfigSaveLocation = dic['Instance' + str(ch)][3]
@@ -385,7 +385,7 @@ def RemoveMods(dic, ch, pgnb=0):
 def AddMods(dic, ch, pgnb=0):
     InstanceLoad = dic['Instance' + str(ch)]
     modsList = InstanceLoad[2].split(',')
-    direc = directSearch(Config.SteamAppsPath + "\common\\Starbound\mods")
+    direc = directSearch(Config.SteamAppsPath + "\common\\Starbound\mods") + pakSearch(Config.SteamAppsPath + "\common\\Starbound\mods")
     if Config.ShowMode == "2" or Config.ShowMode == "3":
         try:
             Changement = int(input(Translate.AddMods2(dic['Instance' + str(ch)][2], ",".join(direc), pgnb)))

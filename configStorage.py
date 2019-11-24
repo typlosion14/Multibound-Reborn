@@ -2,7 +2,7 @@ import configparser as cp
 import os
 
 from CobraLib import StringToList
-from libCollectionSteam import TitleWorkshop
+from libCollectionSteam import TitleWorkshop,MultipleTitleWorkshop
 
 
 class Translate:
@@ -158,14 +158,15 @@ class Translate:
             return "What mod you want to remove ?\n" + pageShow(pgnb, StringToList(modsList))[
                 0] + "11.Leave\n12.Previous Page\n13.Next Page\n"
 
-    def WorkshopMod1(WorkshopList, direc, pgnb):  # Add Workshop Config 2 et 3
+    def WorkshopMod1(WorkshopList:str, direc, pgnb):  # Add Workshop Config 2 et 3
+        WorkshopList=', '.join(MultipleTitleWorkshop(WorkshopList.split(',')))
         print(Translate.loading())
         if Config.TranslateConfig == "fr":
-            return "Voici les objets du Workshop:" + WorkshopList + "\nQuel Objet voulez-vous rajoutez ?\n" + \
+            return "Voici les objets du Workshop:" +  WorkshopList + "\nQuel Objet voulez-vous rajoutez ?\n" + \
                    pageShow(pgnb, StringToList(direc.replace('Disabled.', '')))[
                        0] + "11.Quitter\n12.Page Précédente\n13.Page Suivante\n"
         else:
-            return "Here the workshop object:" + WorkshopList + "\nWhat object you want to add ?\n" + \
+            return "Here the workshop object:" +  WorkshopList + "\nWhat object you want to add ?\n" + \
                    pageShow(pgnb, StringToList(direc.replace('Disabled.', '')))[
                        0] + "11.Leave\n12.Previous Page\n13.Next Page\n"
 
@@ -182,7 +183,7 @@ class Translate:
 
     def AddWorkshop(WorkshopList, direc):  # Add Workshop Config 1
         if Config.TranslateConfig == "fr":
-            return "Voici les objets du Workshop:" + WorkshopList + "\nVoici les objets installés:" + direc.replace(
+            return "Voici les objets du Workshop:" +WorkshopList + "\nVoici les objets installés:" + direc.replace(
                 'Disabled.', '') + "\nQuel Objet voulez-vous rajoutez (ecrivez '1' pour quitter)?\n"
         else:
             return "Here the workshop object:" + WorkshopList + "\nHere the installed object:" + direc.replace(
@@ -335,7 +336,7 @@ class Config:
     SteamAppsPath = "D:\SteamLibrary\steamapps"
     OriginPath = ".\\"
     ShowMode = "1"
-    Version = "1.3.2"
+    Version = "1.4.0"
 
 
 def pageShow(pgnb, modsList):
@@ -362,3 +363,4 @@ def pageShow(pgnb, modsList):
         msg = "None\n"
         List = ['None'] * 11
     return msg, List
+

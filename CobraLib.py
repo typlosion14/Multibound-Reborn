@@ -32,6 +32,14 @@ def directSearch(a_dir):
     return [name for name in os.listdir(a_dir)
             if os.path.isdir(os.path.join(a_dir, name))]
 
+def pakSearch(a_dir):
+    listdir=os.listdir(a_dir)
+    dirpak=[]
+    for i in range(len(listdir)):
+        if listdir[i].endswith(".pak"):
+            dirpak.append(listdir[i])
+    return dirpak
+
 
 def ListToString(list):
     string = ''

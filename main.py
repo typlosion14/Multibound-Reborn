@@ -3,8 +3,9 @@ import webbrowser
 import os
 import json
 import shutil
-from CobraLib import directSearch,importjson
+from CobraLib import directSearch,importjson,pakSearch
 from configStorage import Config, Translate, init
+from secret import key
 
 
 def ChooseYourInstance(dic):
@@ -23,7 +24,7 @@ def ChooseYourInstance(dic):
         return ChooseYourInstance(dic)
 
 def CheckUpdate():
-    DicGit=json.loads(importjson("https://api.github.com/repos/typlosion14/Multibound-Reborn/releases/latest","77a0b70044d0f39e64f08097a21f5a750d5b1323 "))
+    DicGit=json.loads(importjson("https://api.github.com/repos/typlosion14/Multibound-Reborn/releases/latest",key()))
     VersionGit=DicGit['tag_name']
     config = cp.ConfigParser()
     config.read_file(open('config.ini'))
@@ -70,7 +71,6 @@ def InstanceAppli(ch, dic):
         for i in range(0, len(direc)):
             if not direc[i].startswith("Disabled."):
                 VerifDirec=direc[i]
-                print(VerifDirec)
                 for y in range(0,len(direc)):
                     if direc[y].startswith("Disabled.") and direc[y].endswith(VerifDirec):
                         shutil.rmtree(Config.SteamAppsPath + "\\workshop\content\\211820\\Disabled."+VerifDirec)
@@ -83,7 +83,7 @@ def InstanceAppli(ch, dic):
 
         return Translate.WorkshopError()
     try: #changer les mods
-        direc = directSearch(Config.SteamAppsPath + "\\common\Starbound\mods")
+        direc = directSearch(Config.SteamAppsPath + "\\common\Starbound\mods") + pakSearch(Config.SteamAppsPath + "\common\\Starbound\mods")
         os.chdir(Config.SteamAppsPath + "\\common\Starbound\mods")
         for i in range(0, len(direc)):
             if not direc[i].startswith(".Disabled."):
@@ -117,7 +117,7 @@ def InstanceAppli(ch, dic):
         if direc[i].startswith("Disabled."):
             NewName=str(direc[i][direc[i].find('.')+1:])
             os.rename(direc[i], NewName)
-    direc = directSearch(Config.SteamAppsPath + "\\common\Starbound\mods")
+    direc = directSearch(Config.SteamAppsPath + "\\common\Starbound\mods") + pakSearch(Config.SteamAppsPath + "\common\\Starbound\mods")
     os.chdir(Config.SteamAppsPath + "\\common\Starbound\mods")
     for i in range(0, len(direc)):
         if direc[i].startswith(".Disabled."):
@@ -136,7 +136,7 @@ def ListeCreator(dic):
         AllName.append(dic['Instance' + str(i + 1)][0])
     return AllName
 
-CheckUpdate()
+print(CheckUpdate())
 print(init())
 inst = LoadingInstance()
 print(inst[0])
