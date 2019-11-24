@@ -22,8 +22,8 @@
 	- Entrer (avec les ") "pathtoStarbound/Multibound Reborn.exe" %command%, changez le 'pathtoStarbound' au chemin du fichier Multibound Reborn.exe
 	- Sauvegardez les changements et lancer le jeu.
 ## Scan Virus Total:
-- Editeur: https://www.virustotal.com/gui/file/601d030ad83d61c20b4071431209e84ca35c439b0cf4bb52cfe707fe0ddbedaa/detection
-- Launcheur: https://www.virustotal.com/gui/file/92c3095b20235d9c158bc8630af83c2a78a8b4f9ece073b838fa4bbb0abbd040/detection
+- Launcheur: https://www.virustotal.com/gui/file/68b266e14e63686060f6a7a57637b0360f2aa8782669f4503bd47a0dc796122e/detection
+- Editeur: https://www.virustotal.com/gui/file-analysis/YjA5YWQxY2I2MTRlMzJjMGFiYzJjZjhiNTM3MDM2Mzk6MTU3NDYyNDgzNA==/detection
 - Le programme manipule les fichiers, ils les deplacent et les renommes, cela explique la note VirusTotal le code étant sur GitHub, vous pouvez verifier vous-même.
 - The program manipulates the files, they move them and rename them, that explains the Virustotal score, the code being on Github, you can check it yourself.
 
