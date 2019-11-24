@@ -336,7 +336,7 @@ class Config:
     SteamAppsPath = "D:\SteamLibrary\steamapps"
     OriginPath = ".\\"
     ShowMode = "1"
-    Version = "1.4.0"
+    Version = "1.4.1"
 
 
 def pageShow(pgnb, modsList):

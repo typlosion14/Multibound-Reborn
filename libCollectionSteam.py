@@ -27,6 +27,7 @@ def Collection(collectionid):  # 1357125616
 
 
 def TitleWorkshop(appid):  # 1790667104
+    print(appid)
     try:
         file=open('storage.json','r')
         storage=file.read()
@@ -34,6 +35,7 @@ def TitleWorkshop(appid):  # 1790667104
     except:
         file=open('storage.json','w')
         storage='{}'
+        file.write(storage)
         file.close()
     if str(appid) in storage:
         stockage=json.loads(storage)
@@ -51,6 +53,8 @@ def TitleWorkshop(appid):  # 1790667104
         file = open('storage.json','w')
         file.write(stockage)
         file.close()
+        if appid.endswith('.pak'):
+            return appid+' , '+Title
         return Title
 
 def MultipleTitleWorkshop(appid):
