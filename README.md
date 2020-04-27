@@ -4,7 +4,7 @@
 	- Right-click on Starbound under the Library in Steam and select Properties.
 	- Under the Local Files tab click the Browse Local files button.
 	- Go in Win64 (or win32) and extract all the files from the archive.
-	- Launch Multibound Reborn Editor.jar and choose Edit in the config section, add the steamApps Path and save
+	- Launch Multibound Reborn Editor.jar and choose Edit in the config section, add the ***steamApps*** *Path* and save
 2. Set Launch Options
 	- Right-click on Starbound under the Library in Steam and select Properties.
 	- Under the General tab click the Set launch options... button.
@@ -15,7 +15,7 @@
 	- Clique droit sur Starbound dans la bibliotheque steam and choissisez Proprietes.
 	- Dans l'onglet Fichiers locaux cliquez sur Parcourir les fichiers locaux...
 	- Allez dans win64 (ou win32) et extrayez tous les fichiers de l'archive
-	- Lancer Multibound Reborn Editor.jar et choissisez Edit/Modifier dans la section config,ajouter le steamApps Path et save
+	- Lancer Multibound Reborn Editor.jar et choissisez Edit/Modifier dans la section config,ajouter le ***steamApps*** *Path* et save
 2. Changez les options de lancement
 	- Clique droit sur Starbound dans la bibliotheque steam and choissisez Proprietes.
 	- Dans l'onglet General cliquez sur Definir les options de lancement...
