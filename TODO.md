@@ -9,3 +9,4 @@
 - [ ] TODO clean Save --> Move All save files in default for clean--> CleanEditor
 - [ ] TODO blacklist compatibility -->ImportInstance
 - [ ] TODO InstanceName delete .Disabled. and .disabled
+- [ ] TODO Edit Launcheur
