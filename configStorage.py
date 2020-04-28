@@ -2,7 +2,7 @@ import configparser as cp
 import os
 
 from CobraLib import StringToList
-from libCollectionSteam import TitleWorkshop,MultipleTitleWorkshop
+from libCollectionSteam import TitleWorkshop, MultipleTitleWorkshop
 
 
 class Translate:
@@ -158,15 +158,15 @@ class Translate:
             return "What mod you want to remove ?\n" + pageShow(pgnb, StringToList(modsList))[
                 0] + "11.Leave\n12.Previous Page\n13.Next Page\n"
 
-    def WorkshopMod1(WorkshopList:str, direc, pgnb):  # Add Workshop Config 2 et 3
-        WorkshopList=', '.join(MultipleTitleWorkshop(WorkshopList.split(',')))
+    def WorkshopMod1(WorkshopList: str, direc, pgnb):  # Add Workshop Config 2 et 3
+        WorkshopList = ', '.join(MultipleTitleWorkshop(WorkshopList.split(',')))
         print(Translate.loading())
         if Config.TranslateConfig == "fr":
-            return "Voici les objets du Workshop:" +  WorkshopList + "\nQuel Objet voulez-vous rajoutez ?\n" + \
+            return "Voici les objets du Workshop:" + WorkshopList + "\nQuel Objet voulez-vous rajoutez ?\n" + \
                    pageShow(pgnb, StringToList(direc.replace('Disabled.', '')))[
                        0] + "11.Quitter\n12.Page Précédente\n13.Page Suivante\n"
         else:
-            return "Here the workshop object:" +  WorkshopList + "\nWhat object you want to add ?\n" + \
+            return "Here the workshop object:" + WorkshopList + "\nWhat object you want to add ?\n" + \
                    pageShow(pgnb, StringToList(direc.replace('Disabled.', '')))[
                        0] + "11.Leave\n12.Previous Page\n13.Next Page\n"
 
@@ -183,7 +183,7 @@ class Translate:
 
     def AddWorkshop(WorkshopList, direc):  # Add Workshop Config 1
         if Config.TranslateConfig == "fr":
-            return "Voici les objets du Workshop:" +WorkshopList + "\nVoici les objets installés:" + direc.replace(
+            return "Voici les objets du Workshop:" + WorkshopList + "\nVoici les objets installés:" + direc.replace(
                 'Disabled.', '') + "\nQuel Objet voulez-vous rajoutez (ecrivez '1' pour quitter)?\n"
         else:
             return "Here the workshop object:" + WorkshopList + "\nHere the installed object:" + direc.replace(
@@ -207,18 +207,21 @@ class Translate:
             return "You have load:" + InstanceName + "\nWorkshop list: " + Workshop + "\nMods list :" + ModLoad.replace(
                 'Disabled.',
                 '') + "\nWhat you want to do?\n1.Rename Instance\n2.Delete a mod in Workshop List\n3.Add a mod in Workshop List\n4.Delete a mod in Mods List\n5.Add a mod in Mods List\n6.Add a collection\n7.Delete a collection\n8.Change the save location\n9.Change the selected Instance\n"
+
     def Import(self=''):
         if Config.TranslateConfig == "fr":
             return "Selectionnez le instance.json de l'instance à import:\n"
         else:
             return "Choose the instance.json of the instance you want to import:\n"
+
     def ErrorMultiboundModsID(self=''):
-        if Config.TranslateConfig =="fr":
+        if Config.TranslateConfig == "fr":
             return "Erreur dans le instance.json lié avec un workshopid, verifié que tous les workshopid sont bien des nombres.\n"
         else:
             return "Error in instance.json link with workshopid, verify if all workshopid are numbers.\n"
+
     def saveLocation(location):
-        if location=='default':
+        if location == 'default':
             if Config.TranslateConfig == "fr":
                 return "Les sauvegardes de cette instance sont dans les saves de Starbound\nVoulez-vous changer pour quelles soit à part?\n1.Oui\n2.Non"
             else:
@@ -248,6 +251,7 @@ class Translate:
             return "Un problème a eu lieu lors de la modification des fichiers des Mods."
         else:
             return "Problem when trying to modify Mods files."
+
     def LaunchStarbound(self=''):
         if Config.TranslateConfig == "fr":
             return """
@@ -263,26 +267,31 @@ class Translate:
             Starbound opening, don't close this windows or you will need to move all mods and your save manually!!!
             Starbound opening, don't close this windows or you will need to move all mods and your save manually!!!
                         """
+
     def QuitStarbound(self=''):
         if Config.TranslateConfig == "fr":
             return "Fermeture de Starbound..."
         else:
             return "Quit Starbound..."
+
     def NeedUpdate(self=""):
         if Config.TranslateConfig == "fr":
             return "Nouvelle version trouvée!\n"
         else:
             return "New Update found!\n"
+
     def DownloadChoice(self=""):
         if Config.TranslateConfig == "fr":
             return "Voulez-vous la telechargez maintenant?\nTapez 1 pour Oui:\n"
         else:
             return "Do you want to download now the new update?\nType 1 for Yes:\n"
+
     def PleaseInstall(self=""):
         if Config.TranslateConfig == "fr":
             return "Après la fermeture de cette fenetre, Decompressez l'archive (sauf config.ini)"
         else:
             return "After closing the window, uncompress the archive (without config.ini) "
+
     def ChooseInstanceMain(self=''):
         if Config.TranslateConfig == "fr":
             return "Choissisez l'instance que vous souhaitez:"
@@ -301,24 +310,25 @@ class Translate:
         else:
             return "No Update Found!"
 
+
 def init():
     config = cp.ConfigParser()
     try:
-        config.read_file(open('config.ini'))
+        config.read_file(open('files/config.ini'))
     except:
-        return ("config.ini Not Found")
+        return ("files/config.ini Not Found")
     Config.OriginPath = os.getcwd()
     Config.InstanceNumber = int(len(config.sections()[1:]))
     try:
         Config.Unstable = bool(config.get('OPTIONS', 'Unstable'))
     except:
         return Translate.UnstableBool()
-    if config.get('OPTIONS', 'Language') in ("fr","en"):
+    if config.get('OPTIONS', 'Language') in ("fr", "en"):
         Config.TranslateConfig = config.get('OPTIONS', 'Language')
-    if str(config.get('OPTIONS', 'editormode')) in ('1','2',"3"):
+    if str(config.get('OPTIONS', 'editormode')) in ('1', '2', "3"):
         Config.ShowMode = str(config.get('OPTIONS', 'editormode'))
     try:
-        SteamAppsPath = config.get('OPTIONS', 'SteamAppsPath')
+        SteamAppsPath = config.get('OPTIONS', 'SteamAppsPath').replace("\\\\", '\\').replace("\\:", ":")
         os.chdir(SteamAppsPath + "\\workshop\content\\211820")
         os.chdir(SteamAppsPath + "\\common\Starbound")  # Unstable change todo
         os.chdir(SteamAppsPath)
@@ -336,7 +346,7 @@ class Config:
     SteamAppsPath = "D:\SteamLibrary\steamapps"
     OriginPath = ".\\"
     ShowMode = "1"
-    Version = "1.4.1"
+    Version = "2.0.0"
 
 
 def pageShow(pgnb, modsList):
@@ -363,4 +373,3 @@ def pageShow(pgnb, modsList):
         msg = "None\n"
         List = ['None'] * 11
     return msg, List
-
