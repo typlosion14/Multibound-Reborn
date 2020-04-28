@@ -1,4 +1,7 @@
 # Multibound-Reborn
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/be2ed1c615104e9cb941120dd5385e51)](https://app.codacy.com/manual/typlosion14/Multibound-Reborn?utm_source=github.com&utm_medium=referral&utm_content=typlosion14/Multibound-Reborn&utm_campaign=Badge_Grade_Dashboard)
+
 ## Install Tutorial EN:
 1. Go to Starbound files
 	- Right-click on Starbound under the Library in Steam and select Properties.
