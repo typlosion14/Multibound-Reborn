@@ -6,7 +6,7 @@
 -->EditorInstance
 - [ ] TODO catch transform in warning (or maybe a logs.txt) --> ALL
 - [ ] LITE TODO regex --> Instance
-- [ ] TODO clean Save --> Move All save files in default for clean--> CleanEditor
+- [X] TODO clean Save --> Move All save files in default for clean--> CleanEditor
 - [ ] TODO blacklist compatibility -->ImportInstance
 - [X] TODO InstanceName delete .Disabled. and .disabled
 - [X] TODO Edit Launcheur
