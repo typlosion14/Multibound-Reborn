@@ -31,6 +31,6 @@
 - The program manipulates the files, they move them and rename them, that explains the Virustotal score, the code being on Github, you can check it yourself.
 
 If you want to help me for my futur project, you can donate at:
-patreon.com/Typlosion
+https://ko-fi.com/typlosion
 
 Thanks for downloading and have fun!
