@@ -10,3 +10,4 @@
 - [ ] TODO blacklist compatibility -->ImportInstance
 - [X] TODO InstanceName delete .Disabled. and .disabled
 - [X] TODO Edit Launcheur
+- [ ] TODO Loading bar when loading Steam name
