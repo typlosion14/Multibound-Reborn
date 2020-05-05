@@ -24,8 +24,7 @@ public class ImportCollectionSteam extends JPanel implements Panel, ActionListen
 	private static final long serialVersionUID = 1L;
 	private JLabel txtWarning=new JLabel("");
 	private JButton back_btn= new JButton("ERROR"), 
-			save_btn= new JButton("ERROR"), 
-			check_btn= new JButton("ERROR");
+			save_btn= new JButton("ERROR");
 	private JTextField name_field=new JTextField(),
 				collectionField=new JTextField("");
 	private String[] workshopList = null, 
@@ -81,7 +80,7 @@ public class ImportCollectionSteam extends JPanel implements Panel, ActionListen
 		collectionField.setBounds(178, 134, 89, 23);
 		add(collectionField);
 
-		check_btn = new JButton("Check");
+		JButton check_btn = new JButton("Check");
 		check_btn.setBounds(110, 167, 89, 23);
 		add(check_btn);
 

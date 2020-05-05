@@ -28,7 +28,7 @@ public class EditInst extends JPanel implements ActionListener, ListSelectionLis
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	Instance instance;
+	private Instance instance;
 	private JLabel warningText = new JLabel();
 	private JList<Mods> disabledList=  new JList<Mods>(instance.getDesactivedMods(warningText)), 
 				activatedList = new JList<Mods>(instance.getModsList());
@@ -40,13 +40,13 @@ public class EditInst extends JPanel implements ActionListener, ListSelectionLis
 			btnAllDisabled = new JButton("ERROR"), 
 			btnAllActived = new JButton("ERROR");
 	private JTextField txtGetname = new JTextField();
-	boolean isWorkshop;
+	private boolean isWorkshop;
 	private String[] combolist = { "default", "Instance" };
 	private JComboBox<String> comboBox;
 
-	EditInst(int Instancenb, boolean a) {
+	EditInst(int INb, boolean a) {
 		isWorkshop = a;
-		instance = new Instance(Instancenb);
+		instance = new Instance(INb);
 		if (isWorkshop) {
 			Launcheur.setFrame("Multibound Reborn - Edit Workshop " + instance.getName(), 100, 100, 586, 404);
 			setBounds(100, 100, 586, 404);
@@ -72,7 +72,7 @@ public class EditInst extends JPanel implements ActionListener, ListSelectionLis
 		add(lblSave);
 
 		comboBox = new JComboBox<String>(combolist);
-		if (!instance.getSaveLocation().equals("default") && !instance.getSaveLocation().equals(null)) {
+		if (!instance.getSaveLocation().equals("default") && instance.getSaveLocation()!=null) {
 			comboBox.setSelectedIndex(1);
 		} else {
 			comboBox.setSelectedIndex(0);

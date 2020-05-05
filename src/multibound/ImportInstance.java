@@ -30,11 +30,10 @@ public class ImportInstance extends JPanel implements Panel, ActionListener {
 	private static final long serialVersionUID = 1L;
 	private JLabel txtWarning= new JLabel("");
 	private JFileChooser fc=new JFileChooser();
-	private JButton fc_btn= new JButton("ERROR"),
-		back_btn= new JButton("ERROR"),
-		save_btn= new JButton("ERROR");
+	private JButton back_btn= new JButton("ERROR"),
+					save_btn= new JButton("ERROR");
 	private JTextField name_field= new JTextField();
-	boolean fileAccepted = false;
+	private boolean fileAccepted = false;
 	private File file = null;
 
 	public ImportInstance() {
@@ -87,7 +86,7 @@ public class ImportInstance extends JPanel implements Panel, ActionListener {
 		fc.setFileFilter(new FileNameExtensionFilter("JSON", "json"));
 		fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
-		fc_btn = new JButton("Browse...");
+		JButton fc_btn = new JButton("Browse...");
 		fc_btn.setBounds(179, 164, 89, 23);
 		add(fc_btn);
 

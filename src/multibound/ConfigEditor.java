@@ -24,8 +24,7 @@ public class ConfigEditor extends JPanel implements ActionListener, Panel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JButton back_btn= new JButton("ERROR"),
-			save_btn= new JButton("ERROR"),
-			fc_btn= new JButton("ERROR");
+			save_btn= new JButton("ERROR");
 	private JFileChooser fc;
 	private JLabel txtWarning;
 	private String[] comboLanguage ={ "en", "fr" },
@@ -109,7 +108,7 @@ public class ConfigEditor extends JPanel implements ActionListener, Panel {
 		txtWarning.setBounds(50, 204, 247, 14);
 		add(txtWarning);
 
-		fc_btn = new JButton("Browse...");
+		JButton fc_btn = new JButton("Browse...");
 		fc_btn.setBounds(192, 163, 89, 23);
 		add(fc_btn);
 

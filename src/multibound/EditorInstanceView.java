@@ -33,11 +33,9 @@ public class EditorInstanceView extends JPanel implements ActionListener, ListSe
 	 */
 	private static final long serialVersionUID = 1L;
 	private JButton btn_back= new JButton("ERROR"), 
-			ok_btn= new JButton("ERROR"),
 			del_btn= new JButton("ERROR");
 	private JLabel txtWarning = new JLabel();
 	private JList<String> list = new JList<String>();
-	private String[] listName;
 	private DefaultListModel<String> activatedModel = new DefaultListModel<String>();
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
@@ -50,7 +48,7 @@ public class EditorInstanceView extends JPanel implements ActionListener, ListSe
 		title.setBounds(93, 22, 141, 14);
 		add(title);
 		setLayout(null);
-		listName = Instance.getListName();
+		String[] listName = Instance.getListName();
 		for (String element : listName) {
 			activatedModel.addElement(element);
 		}
@@ -67,7 +65,7 @@ public class EditorInstanceView extends JPanel implements ActionListener, ListSe
 		btn_back.setBounds(29, 294, 89, 23);
 		add(btn_back);
 
-		ok_btn = new JButton("OK");
+		JButton ok_btn = new JButton("OK");
 		ok_btn.setBounds(203, 294, 89, 23);
 		add(ok_btn);
 

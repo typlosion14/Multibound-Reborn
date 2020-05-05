@@ -20,13 +20,14 @@ public class Instance {
 	private String savelocation,
 			modslist,
 			workshoplist;
-	private Ini config;
 
 	Instance(int nb) {
+		Ini config = new Ini();
 		try {
 			config = new Ini(new File("files/config.ini"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		}
 		this.nb = nb;
