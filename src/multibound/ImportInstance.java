@@ -28,14 +28,14 @@ public class ImportInstance extends JPanel implements Panel, ActionListener {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	JLabel txtWarning;
-	JFileChooser fc;
-	JButton fc_btn,
-	back_btn,
-	save_btn;
-	JTextField name_field;
+	private JLabel txtWarning= new JLabel("");
+	private JFileChooser fc=new JFileChooser();
+	private JButton fc_btn= new JButton("ERROR"),
+		back_btn= new JButton("ERROR"),
+		save_btn= new JButton("ERROR");
+	private JTextField name_field= new JTextField();
 	boolean fileAccepted = false;
-	File file = null;
+	private File file = null;
 
 	public ImportInstance() {
 		setBounds(100, 100, 361, 342);
@@ -46,7 +46,6 @@ public class ImportInstance extends JPanel implements Panel, ActionListener {
 		title.setBounds(107, 11, 108, 14);
 		add(title);
 
-		txtWarning = new JLabel("");
 		txtWarning.setEnabled(false);
 		txtWarning.setForeground(Color.RED);
 		txtWarning.setBounds(50, 204, 247, 14);
@@ -65,7 +64,6 @@ public class ImportInstance extends JPanel implements Panel, ActionListener {
 		name_label.setBounds(75, 54, 46, 14);
 		add(name_label);
 
-		name_field = new JTextField();
 		name_field.setBounds(181, 51, 86, 20);
 		add(name_field);
 		name_field.setColumns(10);
@@ -85,7 +83,6 @@ public class ImportInstance extends JPanel implements Panel, ActionListener {
 		import_label.setBounds(75, 167, 46, 14);
 		add(import_label);
 
-		fc = new JFileChooser();
 		fc.setCurrentDirectory(new File("D:\\Cours\\HS\\MultiBound-master\\ExampleRoot\\instances\\Modpack Example"));
 		fc.setFileFilter(new FileNameExtensionFilter("JSON", "json"));
 		fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -126,7 +123,7 @@ public class ImportInstance extends JPanel implements Panel, ActionListener {
 					JSONArray assets = (JSONArray) jsonObject.get("assetSources");
 					JSONObject temp = (JSONObject) assets.get(0);
 					if (temp.get("blacklist") == null) {
-						// TODO Import JSONArray
+						// TODO finish blacklist Import JSONArray
 					} else {
 						System.out.println(temp.get("blacklist"));
 						JSONArray blacklist = (JSONArray) temp.get("blacklist");

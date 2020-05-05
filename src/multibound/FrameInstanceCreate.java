@@ -22,7 +22,7 @@ public class FrameInstanceCreate extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	private JTextField textField;
 	private JButton btn_yes;
-	JButton btn_back;
+	private JButton btn_back;
 
 	/**
 	 * Create the frame.
@@ -78,7 +78,7 @@ public class FrameInstanceCreate extends JPanel implements ActionListener {
 		            ini.put("INSTANCE"+i,"modslist","None");
 		            ini.put("INSTANCE"+i,"savelocation","default");
 		            ini.store();
-		            Launcheur.setPanel(new EditorInstance(i,true));
+		            Launcheur.setPanel(new EditInst(i,true));
 		        }catch(Exception er){
 		            System.err.println(er.getMessage());
 		        }

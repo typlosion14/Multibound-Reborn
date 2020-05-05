@@ -15,12 +15,12 @@ import javax.swing.JLabel;
 import org.ini4j.Ini;
 
 public class Instance {
-	int nb;
-	String name;
-	String savelocation;
-	String modslist;
-	String workshoplist;
-	Ini config;
+	private int nb;
+	private String name;
+	private String savelocation,
+			modslist,
+			workshoplist;
+	private Ini config;
 
 	Instance(int nb) {
 		try {
@@ -76,7 +76,7 @@ public class Instance {
 		return list;
 	}
 
-	static int getInstanceNb() {
+	public static int getInstanceNb() {
 		String contents = "";
 		try {
 			contents = new String(Files.readAllBytes(Paths.get("files/config.ini")));
@@ -87,7 +87,7 @@ public class Instance {
 		return (contents.split(Pattern.quote("[INSTANCE"), -1).length)-1;//TODO regex ;_;[INSTANCE([0-9]|[0-9][0-9])]
 	}
 
-	static Dictionary<String, Integer> getDicNameId() {//Dictionnaire pour avoir Instance Name : Instance ID
+	public static Dictionary<String, Integer> getDicNameId() {//Dictionnaire pour avoir Instance Name : Instance ID
 		Ini config=null;
 		try {
 			config = new Ini(new File("files/config.ini"));
@@ -102,7 +102,7 @@ public class Instance {
 		return dic;
 
 	}
-	static String[] getListName() {//Obtenir tous les noms des instances
+	public static String[] getListName() {//Obtenir tous les noms des instances
 		String[] list=new String[getInstanceNb()];
 		Ini config=null;
 		try {
@@ -138,7 +138,7 @@ public class Instance {
 		}catch (Exception e) {
 			warningText.setText("GET FILE ERROR MODS");
 		}
-		ArrayList<String> listFiles= new ArrayList<String>();;
+		ArrayList<String> listFiles= new ArrayList<String>();
 		for (File file : folder.listFiles()) {
 			if(file.isDirectory() || file.getName().endsWith(".pak")) {
 				listFiles.add(file.getName());

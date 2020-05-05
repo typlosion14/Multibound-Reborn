@@ -14,7 +14,11 @@ public class Menu extends JPanel implements ActionListener {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JButton instance_buttonCreate,instance_buttonEdit,config_buttonClean,config_buttonEdit,other_buttonImport;
+	private JButton instance_buttonCreate = new JButton("ERROR"),
+	instance_buttonEdit= new JButton("ERROR"),
+	config_buttonClean= new JButton("ERROR"),
+	config_buttonEdit= new JButton("ERROR"),
+	other_buttonImport= new JButton("ERROR");
 
 	Menu(){
 		Launcheur.setFrame("Multibound Reborn",100, 100, 450, 300);

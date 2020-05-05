@@ -22,11 +22,15 @@ public class ImportCollectionSteam extends JPanel implements Panel, ActionListen
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	JLabel txtWarning;
-	JButton back_btn, save_btn, check_btn;
-	JTextField name_field, collectionField;
-	String[] workshopList = null, comboS = new String[] { "default", "Instance" };
-	JComboBox<String> comboBox;
+	private JLabel txtWarning=new JLabel("");
+	private JButton back_btn= new JButton("ERROR"), 
+			save_btn= new JButton("ERROR"), 
+			check_btn= new JButton("ERROR");
+	private JTextField name_field=new JTextField(),
+				collectionField=new JTextField("");
+	private String[] workshopList = null, 
+			comboS = new String[] { "default", "Instance" };
+	private JComboBox<String> comboBox;
 
 	public ImportCollectionSteam() {
 		setBounds(100, 100, 361, 342);
@@ -37,7 +41,6 @@ public class ImportCollectionSteam extends JPanel implements Panel, ActionListen
 		title.setBounds(107, 11, 108, 14);
 		add(title);
 
-		txtWarning = new JLabel("");
 		txtWarning.setVisible(false);
 		txtWarning.setForeground(Color.RED);
 		txtWarning.setBounds(50, 204, 247, 14);
@@ -56,7 +59,6 @@ public class ImportCollectionSteam extends JPanel implements Panel, ActionListen
 		name_label.setBounds(70, 54, 46, 14);
 		add(name_label);
 
-		name_field = new JTextField();
 		name_field.setBounds(181, 51, 86, 20);
 		add(name_field);
 		name_field.setColumns(10);
@@ -76,7 +78,6 @@ public class ImportCollectionSteam extends JPanel implements Panel, ActionListen
 		import_label.setBounds(50, 138, 89, 14);
 		add(import_label);
 
-		collectionField = new JTextField("");
 		collectionField.setBounds(178, 134, 89, 23);
 		add(collectionField);
 

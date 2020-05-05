@@ -23,16 +23,16 @@ public class ConfigEditor extends JPanel implements ActionListener, Panel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	JButton back_btn;
-	JButton save_btn;
-	JButton fc_btn;
-	JFileChooser fc;
-	JLabel txtWarning;
-	String[] comboLanguage;
-	String[] comboName;
-	JComboBox<String> comboBoxN;
-	JComboBox<String> comboBoxL;
-	String filepath=null;
+	private JButton back_btn= new JButton("ERROR"),
+			save_btn= new JButton("ERROR"),
+			fc_btn= new JButton("ERROR");
+	private JFileChooser fc;
+	private JLabel txtWarning;
+	private String[] comboLanguage ={ "en", "fr" },
+		comboName={  "Steam Name - filename", "filename - Steam Name", "filename", "Steam Name"  };
+	private JComboBox<String> comboBoxN,
+		comboBoxL;
+	private String filepath=null;
 
 	ConfigEditor() {
 		Launcheur.setFrame("Multibound Reborn - Config", 100, 100, 361, 342);
@@ -49,7 +49,6 @@ public class ConfigEditor extends JPanel implements ActionListener, Panel {
 		lblNewLabel.setBounds(50, 61, 91, 14);
 		add(lblNewLabel);
 		
-		comboLanguage=new String[] { "en", "fr" };
 		comboBoxL = new JComboBox<String>();
 		comboBoxL.setModel(new DefaultComboBoxModel<String>(comboLanguage));
 		comboBoxL.setBounds(169, 58, 84, 20);
@@ -60,7 +59,6 @@ public class ConfigEditor extends JPanel implements ActionListener, Panel {
 		lblNewLabel_1.setBounds(50, 118, 91, 14);
 		add(lblNewLabel_1);
 		
-		comboName=new String[] {  "Steam Name - filename", "filename - Steam Name", "filename", "Steam Name"  };
 		comboBoxN = new JComboBox<String>();
 		comboBoxN.setModel(new DefaultComboBoxModel<String>(comboName));
 		comboBoxN.setBounds(169, 115, 145, 20);

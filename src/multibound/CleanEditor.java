@@ -18,7 +18,9 @@ public class CleanEditor extends JPanel implements ActionListener {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	JButton clean_btn, back_btn, clean_btn_save;
+	private JButton clean_btn = new JButton("ERROR"),
+			back_btn= new JButton("ERROR"),
+			clean_btn_save= new JButton("ERROR");
 
 	CleanEditor() {
 		Launcheur.setFrame("Multibound Reborn - Clean Files", 100, 100, 361, 175);

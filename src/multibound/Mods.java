@@ -17,10 +17,10 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class Mods implements Comparable<Mods> {
-	int id;
-	String name;
-	String filename;
-	boolean isMod;
+	private int id;
+	private String name;
+	private String filename;
+	private boolean isMod;
 	
 	Mods(String id, boolean isMod) {
 		this.isMod = isMod;
@@ -39,7 +39,7 @@ public class Mods implements Comparable<Mods> {
 			}
 
 		}
-		this.name = IniName();
+		this.name = iniName();
 	}
 
 	public String getFilename() {
@@ -90,7 +90,7 @@ public class Mods implements Comparable<Mods> {
 	}
 
 	@SuppressWarnings("unchecked")
-	private String IniName() {
+	private String iniName() {
 		JSONParser parser = new JSONParser();
 		JSONObject jsonObject = null;
 		String title = null;

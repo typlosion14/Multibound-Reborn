@@ -10,8 +10,8 @@ import javax.swing.JPanel;
 
 public class Launcheur{
 
-	static JPanel panel;
-	static JFrame frame;
+	private static JPanel panel;
+	private static JFrame frame;
 
 	public static void main(String[] args) {
 		// Initialisation
