@@ -16,9 +16,11 @@ import org.ini4j.Ini;
 
 public class Instance {
 	int nb;
-	String name, savelocation;
-	String modslist, workshoplist;
-	static Ini config;
+	String name;
+	String savelocation;
+	String modslist;
+	String workshoplist;
+	Ini config;
 
 	Instance(int nb) {
 		try {
@@ -86,6 +88,7 @@ public class Instance {
 	}
 
 	static Dictionary<String, Integer> getDicNameId() {//Dictionnaire pour avoir Instance Name : Instance ID
+		Ini config=null;
 		try {
 			config = new Ini(new File("files/config.ini"));
 		} catch (IOException e) {
@@ -101,6 +104,7 @@ public class Instance {
 	}
 	static String[] getListName() {//Obtenir tous les noms des instances
 		String[] list=new String[getInstanceNb()];
+		Ini config=null;
 		try {
 			config = new Ini(new File("files/config.ini"));
 		} catch (IOException e) {
@@ -115,6 +119,7 @@ public class Instance {
 	
 	public static Mods[] getModsFile(JLabel warningText) {
 		File folder = null;
+		Ini config=null;
 		try {
 			config = new Ini(new File("files/config.ini"));
 		} catch (IOException e) {
@@ -151,6 +156,7 @@ public class Instance {
 	
 	public static Mods[] getWorkshopFile(JLabel warningText) {
 		File folder = null;
+		Ini config=null;
 		try {
 			config = new Ini(new File("files/config.ini"));
 		} catch (IOException e) {
@@ -169,7 +175,7 @@ public class Instance {
 		}catch (Exception e) {
 			warningText.setText("GET FILE ERROR WORKSHOP");
 		}
-		ArrayList<String> listFiles= new ArrayList<String>();;
+		ArrayList<String> listFiles= new ArrayList<String>();
 		for (File file : folder.listFiles()) {
 			if(file.isDirectory()) {
 				listFiles.add(file.getName());

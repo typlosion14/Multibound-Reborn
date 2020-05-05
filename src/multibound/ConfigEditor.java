@@ -23,11 +23,15 @@ public class ConfigEditor extends JPanel implements ActionListener, Panel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	JButton back_btn, save_btn, fc_btn;
+	JButton back_btn;
+	JButton save_btn;
+	JButton fc_btn;
 	JFileChooser fc;
 	JLabel txtWarning;
-	String[] comboLanguage,comboName;
-	JComboBox<String> comboBoxN,comboBoxL;
+	String[] comboLanguage;
+	String[] comboName;
+	JComboBox<String> comboBoxN;
+	JComboBox<String> comboBoxL;
 	String filepath=null;
 
 	ConfigEditor() {
@@ -150,7 +154,8 @@ public class ConfigEditor extends JPanel implements ActionListener, Panel {
 			int option = fc.showOpenDialog(this);
 			if (option == JFileChooser.APPROVE_OPTION) {
 				File file = fc.getSelectedFile();
-				boolean star=false,work=false;
+				boolean star=false;
+				boolean work=false;
 				for(File f:file.listFiles()) {
 					
 					if(f.isDirectory() && f.getName().contains("common")) {

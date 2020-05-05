@@ -2,33 +2,45 @@ package multibound;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
 
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.JTextField;
+
+import org.ini4j.Ini;
+import org.ini4j.InvalidFileFormatException;
+
 import javax.swing.ListSelectionModel;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+
 import java.awt.Color;
 
-public class EditorInstanceView extends JPanel implements ActionListener, ListSelectionListener,Panel  {
+public class EditorInstanceView extends JPanel implements ActionListener, ListSelectionListener, Panel {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	JButton btn_back,ok_btn;
-	private JTextField txtWarning;
+	JButton btn_back, ok_btn, del_btn;
+	private JLabel txtWarning;
 	JList<String> list;
-	
+	String[] listName;
+	DefaultListModel<String> activatedModel = new DefaultListModel<String>();
+
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	EditorInstanceView(){
-		Launcheur.setFrame("Multibound Reborn - Choose a Instance",100, 100, 338, 380);
+	EditorInstanceView() {
+		Launcheur.setFrame("Multibound Reborn - Choose a Instance", 100, 100, 338, 380);
 		setVisible(true);
 		setBounds(100, 100, 338, 380);
 		JLabel title = new JLabel("Choose a Instance:");
@@ -36,65 +48,111 @@ public class EditorInstanceView extends JPanel implements ActionListener, ListSe
 		title.setBounds(93, 22, 141, 14);
 		add(title);
 		setLayout(null);
-		
-		list = new JList(Instance.getListName()); 
+		listName = Instance.getListName();
+		for (String element : listName) {
+			activatedModel.addElement(element);
+		}
+		list = new JList(activatedModel);
 		list.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		list.setLayoutOrientation(JList.HORIZONTAL_WRAP);
 		list.setVisibleRowCount(-1);
 		JScrollPane listScroller = new JScrollPane(list);
 		listScroller.setSize(145, 200);
-		listScroller.setLocation(93, 60);
+		listScroller.setLocation(90, 47);
 		add(listScroller);
-		
-		//TODO Add a delete button
-		
+
 		btn_back = new JButton("Cancel");
-		btn_back.setBounds(49, 295, 89, 23);
+		btn_back.setBounds(29, 294, 89, 23);
 		add(btn_back);
-		
+
 		ok_btn = new JButton("OK");
-		ok_btn.setBounds(195, 295, 89, 23);
+		ok_btn.setBounds(203, 294, 89, 23);
 		add(ok_btn);
-		
-		txtWarning = new JTextField();
+
+		txtWarning = new JLabel();
 		txtWarning.setText("");
 		txtWarning.setForeground(Color.RED);
-		txtWarning.setEditable(false);
-		txtWarning.setBounds(10, 271, 302, 20);
+		txtWarning.setBounds(11, 266, 302, 2);
 		add(txtWarning);
-		txtWarning.setColumns(10);
 		txtWarning.setVisible(false);
 		txtWarning.setHorizontalAlignment(SwingConstants.CENTER);
-		
+
+		del_btn = new JButton("Delete");
+		del_btn.setBounds(128, 294, 63, 23);
+		add(del_btn);
+
 		btn_back.addActionListener(this);
 		ok_btn.addActionListener(this);
 		list.addListSelectionListener(this);
+		del_btn.addActionListener(this);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource()==btn_back) {
+		if (e.getSource().equals(btn_back)) {
 			Launcheur.setPanel(new Menu());
-		}else {
-			if(list.getSelectedIndex()!=-1) {
-				Launcheur.setPanel(new EditorInstance(list.getSelectedIndex()+1,true));
-			}else {
+		} else if (e.getSource() == del_btn) {
+			int test = JOptionPane.showConfirmDialog(this,
+		             "That will delete the instance and the save if you set the savelocation in Instance mode.", 
+		             "Are you sure ?",
+		             JOptionPane.YES_NO_OPTION);
+			if (test==JOptionPane.OK_OPTION) {
+				int InstanceNb = list.getSelectedIndex() + 1;
+				if (list.getSelectedIndex() != -1) {
+					activatedModel.remove(list.getSelectedIndex());
+					list.setModel(activatedModel);
+				}
+				try {
+					Ini ini = new Ini(new File("files\\config.ini"));
+					ini.remove("INSTANCE" + InstanceNb);
+					ini.store();
+
+					String fileex = "";
+					int instancenbb = InstanceNb;
+
+					Scanner myReader = new Scanner(new File("files\\config.ini"));
+					while (myReader.hasNextLine()) {
+						String temp = myReader.nextLine();
+						fileex += temp + "\n";
+					}
+					myReader.close();
+					while (fileex.contains("[INSTANCE" + (instancenbb + 1))) {
+						System.out.println(instancenbb + 1);
+						fileex = fileex.replace("[INSTANCE" + (instancenbb + 1), "[INSTANCE" + instancenbb);
+						instancenbb += 1;
+					}
+					FileWriter myWriter = new FileWriter("files\\config.ini");
+					myWriter.write(fileex);
+					myWriter.close();
+				} catch (InvalidFileFormatException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		} else {
+			if (list.getSelectedIndex() != -1) {
+				Launcheur.setPanel(new EditorInstance(list.getSelectedIndex() + 1, true));
+			} else {
 				txtWarning.setText("Choose a Instance");
 			}
 		}
-		
+
 	}
 
 	@Override
 	public void valueChanged(ListSelectionEvent arg0) {
 		txtWarning.setVisible(false);
-		
+
 	}
 
 	@Override
 	public void setWarning(String text) {
 		txtWarning.setVisible(true);
 		txtWarning.setText(text);
-		
+
 	}
+	
 }

@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Arrays;
 
 import javax.swing.DefaultListModel;
@@ -28,8 +29,15 @@ public class EditorInstance extends JPanel implements ActionListener, ListSelect
 	 */
 	private static final long serialVersionUID = 1L;
 	Instance instance;
-	JList<Mods> disabledList, activatedList;
-	JButton save_btn, back_btn, doubleArrow, DisabledBtn, ActivatedBtn, btnAllDisabled, btnAllActived;
+	JList<Mods> disabledList;
+	JList<Mods> activatedList;
+	JButton save_btn,
+	back_btn,
+	doubleArrow,
+	DisabledBtn,
+	ActivatedBtn,
+	btnAllDisabled,
+	btnAllActived;
 	JLabel warningText;
 	JTextField txtGetname;
 	boolean isWorkshop;
@@ -161,19 +169,34 @@ public class EditorInstance extends JPanel implements ActionListener, ListSelect
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
-		if (source == back_btn) {
+		if (source.equals( back_btn)) {
 			if (isWorkshop) {
 				Launcheur.setPanel(new Menu());
 			} else {
 				Launcheur.setPanel(new EditorInstance(instance.getNumber(), true));
 			}
 
-		} else if (source == save_btn) {
+		} else if (source.equals(save_btn)) {
 			if (txtGetname.getText().length() != 0) {
 				try {
 					Ini ini = new Ini(new File("files\\config.ini"));
-					ini.put("INSTANCE" + instance.getNumber(), "name", txtGetname.getText().replace("[INSTANCE", "Instance"));
-					ini.put("INSTANCE" + instance.getNumber(), "savelocation", combolist[comboBox.getSelectedIndex()]);//TODO if savelocation change move all files
+					ini.put("INSTANCE" + instance.getNumber(), "name",
+							txtGetname.getText().replace("[INSTANCE", "Instance"));
+					String saveloc = ini.get("INSTANCE" + instance.getNumber(), "savelocation");
+					ini.put("INSTANCE" + instance.getNumber(), "savelocation",	combolist[comboBox.getSelectedIndex()]);
+					if (saveloc != combolist[comboBox.getSelectedIndex()] && combolist[comboBox.getSelectedIndex()]=="default") {
+						String steampath = ini.get("OPTIONS", "steamappspath");
+						for (File f : new File(steampath + "\\common\\Starbound\\InstanceSave\\" + instance.getNumber())
+								.listFiles()) {
+							if (f.isDirectory()) {
+								for (File f2 : f.listFiles()) {
+									Files.move(f2.toPath(), new File(steampath + "\\common\\Starbound\\storage\\"
+											+ f.getName() + "\\" + f2.getName()).toPath());
+								}
+
+							}
+						}
+					}
 					Mods[] tempA = getAllElements(activatedList);
 					if (tempA.length != 0) {
 						String totalA = tempA[0].getFilename();
@@ -203,14 +226,14 @@ public class EditorInstance extends JPanel implements ActionListener, ListSelect
 				if (isWorkshop) {
 
 					Launcheur.setPanel(new EditorInstance(instance.getNumber(), false));
-				}else {
+				} else {
 					Launcheur.setPanel(new Menu());
 				}
 			} else {
-				
+				setWarning("Enter a name");
 			}
 
-		} else if (source == btnAllActived) {
+		} else if (source.equals(btnAllActived)) {
 			Mods[] tempD = getAllElements(disabledList);
 			Mods[] tempA = getAllElements(activatedList);
 			DefaultListModel<Mods> activatedModel = new DefaultListModel<Mods>();
@@ -223,7 +246,7 @@ public class EditorInstance extends JPanel implements ActionListener, ListSelect
 			activatedList.setModel(activatedModel);
 			disabledList.setModel(new DefaultListModel<Mods>());
 
-		} else if (source == btnAllDisabled) {
+		} else if (source.equals(btnAllDisabled)) {
 			Mods[] tempD = getAllElements(disabledList);
 			Mods[] tempA = getAllElements(activatedList);
 			DefaultListModel<Mods> disabledModel = new DefaultListModel<Mods>();
@@ -236,7 +259,7 @@ public class EditorInstance extends JPanel implements ActionListener, ListSelect
 			activatedList.setModel(new DefaultListModel<Mods>());
 			disabledList.setModel(disabledModel);
 
-		} else if (source == ActivatedBtn && !disabledList.isSelectionEmpty()) {
+		} else if (source.equals(ActivatedBtn) && !disabledList.isSelectionEmpty()) {
 
 			int[] select = disabledList.getSelectedIndices();
 			// New DesactivedList
@@ -262,7 +285,7 @@ public class EditorInstance extends JPanel implements ActionListener, ListSelect
 			// Set Model
 			activatedList.setModel(activatedModel);
 			disabledList.setModel(disabledModel);
-		} else if (source == DisabledBtn && !activatedList.isSelectionEmpty()) {
+		} else if (source.equals(DisabledBtn) && !activatedList.isSelectionEmpty()) {
 			int[] select = activatedList.getSelectedIndices();
 			// New DesactivedList
 			Mods[] temp = getAllElements(activatedList);
@@ -289,7 +312,7 @@ public class EditorInstance extends JPanel implements ActionListener, ListSelect
 			disabledList.setModel(disabledModel);
 		} else if (disabledList.isSelectionEmpty() && activatedList.isSelectionEmpty()) {
 			setWarning("Choose mods in one of the list");
-		} else if (source == doubleArrow && !disabledList.isSelectionEmpty() && !activatedList.isSelectionEmpty()) {
+		} else if (source.equals(doubleArrow) && !disabledList.isSelectionEmpty() && !activatedList.isSelectionEmpty()) {
 			int[] selectA = activatedList.getSelectedIndices();
 			int[] selectD = disabledList.getSelectedIndices();
 			Mods[] ElementsD = getAllElements(disabledList);

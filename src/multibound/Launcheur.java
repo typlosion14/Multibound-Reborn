@@ -1,6 +1,7 @@
 package multibound;
 
 
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -19,6 +20,7 @@ public class Launcheur{
 		frame=new JFrame();
 		panel=new Menu();
 		frame.setVisible(true);
+		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setContentPane(panel);
 		/*frame.addComponentListener(new ComponentAdapter() 
@@ -39,6 +41,7 @@ public class Launcheur{
 	public static void setFrame(String title, int x,int y,int width,int height) {
 		frame.setTitle(title);
 		frame.setBounds(x, y, width, height);
+		frame.setLocationRelativeTo(null);
 	}
 	
 	public static JFrame getFrame() {

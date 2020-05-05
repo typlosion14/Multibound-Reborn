@@ -30,7 +30,9 @@ public class ImportInstance extends JPanel implements Panel, ActionListener {
 	private static final long serialVersionUID = 1L;
 	JLabel txtWarning;
 	JFileChooser fc;
-	JButton fc_btn, back_btn, save_btn;
+	JButton fc_btn,
+	back_btn,
+	save_btn;
 	JTextField name_field;
 	boolean fileAccepted = false;
 	File file = null;
@@ -100,10 +102,9 @@ public class ImportInstance extends JPanel implements Panel, ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
-		if (source == back_btn) {
+		if (source.equals(back_btn)) {
 			Launcheur.setPanel(new Menu());
-		} else if (source == save_btn) {
-			// TODO save
+		} else if (source.equals(save_btn)) {
 			if (file != null && fileAccepted) {
 				JSONParser parser = new JSONParser();
 				try {
@@ -125,25 +126,25 @@ public class ImportInstance extends JPanel implements Panel, ActionListener {
 					JSONArray assets = (JSONArray) jsonObject.get("assetSources");
 					JSONObject temp = (JSONObject) assets.get(0);
 					if (temp.get("blacklist") == null) {
-						//TODO Import JSONArray
+						// TODO Import JSONArray
 					} else {
 						System.out.println(temp.get("blacklist"));
 						JSONArray blacklist = (JSONArray) temp.get("blacklist");
-						String[] idblack=new String[blacklist.size()];
+						String[] idblack = new String[blacklist.size()];
 						ArrayList<String> arrayblack = new ArrayList<String>();
 						ArrayList<String> arrayworkshop = new ArrayList<String>();
-						Mods[] workshoplist= Instance.getWorkshopFile(txtWarning);
+						Mods[] workshoplist = Instance.getWorkshopFile(txtWarning);
 						for (int i = 0; i < workshoplist.length; i++) {
 							arrayworkshop.add(Integer.toString(workshoplist[i].getId()));
 						}
 						for (int i = 0; i < blacklist.size(); i++) {
 							if (Integer.parseInt((String) blacklist.get(i)) > 0) {
 								arrayblack.add((String) blacklist.get(i));
-							};
+							}
 						}
-						//TODO finish blacklsit de mort
-						arrayblack.toArray( idblack );
-						
+						// TODO finish blacklsit de mort
+						arrayblack.toArray(idblack);
+
 					}
 				} catch (Exception E) {
 					E.printStackTrace();
@@ -180,15 +181,11 @@ public class ImportInstance extends JPanel implements Panel, ActionListener {
 					JSONObject temp = (JSONObject) assets.get(0);
 					fileAccepted = true;
 					if (temp != null) {
-						if (assets != null && temp != null) {
-							if (temp.get("blacklist") == null) {
-								if (temp.get("id") == null)
-									if (temp.get("workshopId") == null) {
-										fileAccepted = false;
-										txtWarning.setForeground(Color.RED);
-										setWarning("This file can't be loaded as a Instance");
-									}
-							}
+						if (assets != null && temp != null && temp.get("blacklist") == null
+								&& temp.get("workshopId") == null && temp.get("id") == null) {
+							fileAccepted = false;
+							txtWarning.setForeground(Color.RED);
+							setWarning("This file can't be loaded as a Instance");
 						}
 					} else {
 

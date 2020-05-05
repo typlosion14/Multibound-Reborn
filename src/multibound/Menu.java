@@ -14,7 +14,7 @@ public class Menu extends JPanel implements ActionListener {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JButton instance_buttonCreate,instance_buttonEdit,config_buttonClean,config_buttonEdit,other_buttonImport,other_button2;
+	private JButton instance_buttonCreate,instance_buttonEdit,config_buttonClean,config_buttonEdit,other_buttonImport;
 
 	Menu(){
 		Launcheur.setFrame("Multibound Reborn",100, 100, 450, 300);
@@ -45,9 +45,9 @@ public class Menu extends JPanel implements ActionListener {
 		other_buttonImport.setBounds(310, 111, 89, 23);
 		add(other_buttonImport);
 	
-		other_button2 = new JButton("Collection");
-		other_button2.setBounds(310, 170, 89, 23);
-		add(other_button2);
+		JButton collec_Imp_btn = new JButton("Collection");
+		collec_Imp_btn.setBounds(310, 170, 89, 23);
+		add(collec_Imp_btn);
 	
 		Label instance_label = new Label("Instance");
 		instance_label.setAlignment(Label.CENTER);
@@ -76,22 +76,22 @@ public class Menu extends JPanel implements ActionListener {
 		config_buttonEdit.addActionListener(this);
 	
 		other_buttonImport.addActionListener(this);
-		other_button2.addActionListener(this);
+		collec_Imp_btn.addActionListener(this);
 		System.gc();
 		
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object source=e.getSource();
-		if (source==instance_buttonCreate) {
+		if (source.equals(instance_buttonCreate)) {
 			Launcheur.setPanel(new FrameInstanceCreate());
-		}else if (source==instance_buttonEdit) {
+		}else if (source.equals(instance_buttonEdit)) {
 			Launcheur.setPanel(new EditorInstanceView());
-		}else if (source==config_buttonClean) {
+		}else if (source.equals(config_buttonClean)) {
 			Launcheur.setPanel(new CleanEditor());
-		}else if (source==config_buttonEdit) {
+		}else if (source.equals(config_buttonEdit)) {
 			Launcheur.setPanel(new ConfigEditor());
-		}else if (source==other_buttonImport) {
+		}else if (source.equals(other_buttonImport)) {
 			Launcheur.setPanel(new ImportInstance());
 		}else {
 			Launcheur.setPanel(new ImportCollectionSteam());

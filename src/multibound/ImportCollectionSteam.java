@@ -92,9 +92,9 @@ public class ImportCollectionSteam extends JPanel implements Panel, ActionListen
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object source = e.getSource();
-		if (source == back_btn) {
+		if (source.equals(back_btn)) {
 			Launcheur.setPanel(new Menu());
-		} else if (source == save_btn) {
+		} else if (source.equals(save_btn)) {
 			if (check()) {
 					String workshopL = workshopList[0];
 					for (int i = 1; i < workshopList.length; i++)

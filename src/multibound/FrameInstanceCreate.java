@@ -21,7 +21,8 @@ public class FrameInstanceCreate extends JPanel implements ActionListener {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JTextField textField;
-	private JButton btn_yes,btn_back;
+	private JButton btn_yes;
+	JButton btn_back;
 
 	/**
 	 * Create the frame.
@@ -62,9 +63,9 @@ public class FrameInstanceCreate extends JPanel implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object source=e.getSource();
-		if(source==btn_back) {
+		if(source.equals(btn_back)) {
 			Launcheur.setPanel(new Menu());
-		}else if(source==btn_yes){
+		}else if(source.equals(btn_yes)){
 			if(textField.getText().length()!=0) {
 				try{
 		            Ini ini = new Ini(new File("files\\config.ini"));

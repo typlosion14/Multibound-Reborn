@@ -24,7 +24,6 @@ public class test {
 
 	private JFrame frame;
 	private JTextField warningText;
-	private JTextField name_field;
 
 	/**
 	 * Launch the application.
@@ -54,65 +53,39 @@ public class test {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 361, 342);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setBounds(100, 100, 361, 175);
+		frame.getContentPane().setBounds(100, 100, 361, 175);
 		frame.getContentPane().setLayout(null);
-		
-		JLabel title = new JLabel("Instance Import");
+
+		JLabel title = new JLabel("Clean files");
 		title.setHorizontalAlignment(SwingConstants.CENTER);
-		title.setBounds(107, 11, 108, 14);
+		title.setBounds(119, 11, 108, 14);
 		frame.getContentPane().add(title);
-		
-		JFileChooser fc = new JFileChooser();
-		fc.setBounds(262, 167, -92, 14);
-		frame.getContentPane().add(fc);
-		
-		JLabel txtWarning = new JLabel("");
-		txtWarning.setEnabled(false);
-		txtWarning.setForeground(Color.RED);
-		txtWarning.setBounds(50, 204, 247, 14);
-		frame.getContentPane().add(txtWarning);
-		
+
+		JLabel warning_label = new JLabel("You're about to clean files mods.");
+		warning_label.setHorizontalAlignment(SwingConstants.CENTER);
+		warning_label.setBounds(36, 36, 274, 25);
+		frame.getContentPane().add(warning_label);
+
+		JLabel label_1 = new JLabel(" if you want uninstall Multibound Reborn it's imperative.");
+		label_1.setHorizontalAlignment(SwingConstants.CENTER);
+		label_1.setBounds(24, 64, 285, 14);
+		frame.getContentPane().add(label_1);
+
 		JButton back_btn = new JButton("Cancel");
-		back_btn.setBounds(50, 240, 89, 23);
+		back_btn.setBounds(36, 91, 89, 23);
 		frame.getContentPane().add(back_btn);
+
+		JButton clean_btn = new JButton("Mods");
+		clean_btn.setBounds(221, 91, 89, 23);
+		frame.getContentPane().add(clean_btn);
 		
-		JButton save_btn = new JButton("Import");
-		save_btn.setBounds(178, 240, 89, 23);
-		frame.getContentPane().add(save_btn);
+		JButton clean_btn_1 = new JButton("Save");
+		clean_btn_1.setBounds(129, 91, 89, 23);
+		frame.getContentPane().add(clean_btn_1);
+
 		
-		JLabel name_label = new JLabel("Name:");
-		name_label.setHorizontalAlignment(SwingConstants.CENTER);
-		name_label.setBounds(70, 54, 46, 14);
-		frame.getContentPane().add(name_label);
 		
-		name_field = new JTextField();
-		name_field.setBounds(181, 51, 86, 20);
-		frame.getContentPane().add(name_field);
-		name_field.setColumns(10);
-		
-		JLabel saveloca_label = new JLabel("Save Location:");
-		saveloca_label.setHorizontalAlignment(SwingConstants.CENTER);
-		saveloca_label.setBounds(50, 95, 86, 14);
-		frame.getContentPane().add(saveloca_label);
-		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"default", "Instance"}));
-		comboBox.setBounds(182, 93, 86, 20);
-		frame.getContentPane().add(comboBox);
-		
-		JLabel import_label = new JLabel("Collection URL:");
-		import_label.setHorizontalAlignment(SwingConstants.CENTER);
-		import_label.setBounds(50, 138, 89, 14);
-		frame.getContentPane().add(import_label);
-		
-		JTextField collectionField = new JTextField("");
-		collectionField.setBounds(178, 134, 89, 23);
-		frame.getContentPane().add(collectionField);
-		
-		JButton btnNewButton = new JButton("Check");
-		btnNewButton.setBounds(110, 167, 89, 23);
-		frame.getContentPane().add(btnNewButton);
 		
 		
 

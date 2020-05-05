@@ -127,25 +127,25 @@ public class Mods implements Comparable<Mods> {
 			return title;
 		} else {
 			if (title.contains("html")) {
-				return filename;
+				return filename.replace(".Disabled.", "").replace(".disabled","");
 			}
 			try {
 				Ini ini = new Ini(new File("files\\config.ini"));
 				String editormode=ini.get("OPTIONS", "editormode");
 				switch (editormode) {
 				case "1":
-					return filename+" - "+ title;
+					return filename.replace(".Disabled.", "").replace(".disabled","")+" - "+ title;
 				case "2":
-					return filename;
+					return filename.replace(".Disabled.", "").replace(".disabled","");
 				case "3":
 					return title;
 				default:
-					return title+" - "+ filename;
+					return title+" - "+ filename.replace(".Disabled.", "").replace(".disabled","");
 				}
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-				return title+" - "+ filename;
+				return title+" - "+ filename.replace(".Disabled.", "").replace(".disabled","");
 				
 			}
 			
