@@ -1,4 +1,4 @@
-- [ ] TODO Resize dynamic --> ALL JPanel
+- [ ] TODO Resize dynamic --> ALL JPanel --> Mods Instance Menu
 - [ ] TODO Language --> fr.json etc
 - [ ] TODO Warning --> InstanceCreate
 - [X] TODO Delete Instance --> EditorInstanceView
