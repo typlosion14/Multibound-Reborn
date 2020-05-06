@@ -112,7 +112,7 @@ public class ImportCollectionSteam extends JPanel implements Panel, ActionListen
 						ini.put("INSTANCE" + i, "modslist", "None");
 						ini.store();
 					} catch (IOException e1) {
-						// TODO Auto-generated catch block
+						setWarning("config.ini not found");
 						e1.printStackTrace();
 					}
 					

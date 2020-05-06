@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -28,11 +29,10 @@ public class ImportInstance extends JPanel implements Panel, ActionListener {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private JLabel txtWarning= new JLabel("");
-	private JFileChooser fc=new JFileChooser();
-	private JButton back_btn= new JButton("ERROR"),
-					save_btn= new JButton("ERROR");
-	private JTextField name_field= new JTextField();
+	private JLabel txtWarning = new JLabel("");
+	private JFileChooser fc = new JFileChooser();
+	private JButton back_btn = new JButton("ERROR"), save_btn = new JButton("ERROR");
+	private JTextField name_field = new JTextField();
 	private boolean fileAccepted = false;
 	private File file = null;
 
@@ -102,10 +102,10 @@ public class ImportInstance extends JPanel implements Panel, ActionListener {
 			Launcheur.setPanel(new Menu());
 		} else if (source.equals(save_btn)) {
 			if (file != null && fileAccepted) {
-				JSONParser parser = new JSONParser();
 				try {
-
-					Scanner myReader = new Scanner(file);
+					JSONParser parser = new JSONParser();
+					Scanner myReader;
+					myReader = new Scanner(file);
 					String jsonfile = "";
 					while (myReader.hasNextLine()) {
 						String tempStr = myReader.nextLine();
@@ -118,7 +118,9 @@ public class ImportInstance extends JPanel implements Panel, ActionListener {
 						}
 					}
 					myReader.close();
-					JSONObject jsonObject = (JSONObject) parser.parse(jsonfile);
+					JSONObject jsonObject;
+					jsonObject = (JSONObject) parser.parse(jsonfile);
+
 					JSONArray assets = (JSONArray) jsonObject.get("assetSources");
 					JSONObject temp = (JSONObject) assets.get(0);
 					if (temp.get("blacklist") == null) {
@@ -142,8 +144,12 @@ public class ImportInstance extends JPanel implements Panel, ActionListener {
 						arrayblack.toArray(idblack);
 
 					}
-				} catch (Exception E) {
-					E.printStackTrace();
+				} catch (FileNotFoundException e1) {
+					setWarning("Json File not found");
+					e1.printStackTrace();
+				} catch (ParseException e1) {
+					setWarning("Can't parse Json File");
+					e1.printStackTrace();
 				}
 
 			}
@@ -196,8 +202,10 @@ public class ImportInstance extends JPanel implements Panel, ActionListener {
 
 				} catch (IOException er) {
 					er.printStackTrace();
+					setWarning("Json File not found");
 				} catch (ParseException er) {
 					er.printStackTrace();
+					setWarning("Can't parse Json File");
 				}
 			}
 		}

@@ -18,13 +18,13 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import org.ini4j.Ini;
-import org.ini4j.InvalidFileFormatException;
 
 import javax.swing.ListSelectionModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 
 import java.awt.Color;
+import java.awt.Cursor;
 
 public class EditorInstanceView extends JPanel implements ActionListener, ListSelectionListener, Panel {
 
@@ -123,16 +123,14 @@ public class EditorInstanceView extends JPanel implements ActionListener, ListSe
 					FileWriter myWriter = new FileWriter("files\\config.ini");
 					myWriter.write(fileex);
 					myWriter.close();
-				} catch (InvalidFileFormatException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
+					setWarning("config.ini not found");
 					e1.printStackTrace();
 				}
 			}
 		} else {
 			if (list.getSelectedIndex() != -1) {
+				setCursor(new Cursor(Cursor.WAIT_CURSOR));
 				Launcheur.setPanel(new EditInst(list.getSelectedIndex() + 1, true));
 			} else {
 				txtWarning.setText("Choose a Instance");

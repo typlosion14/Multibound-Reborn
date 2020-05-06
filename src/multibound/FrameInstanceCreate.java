@@ -11,10 +11,12 @@ import javax.swing.JTextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 
 import javax.swing.JButton;
+import java.awt.Color;
 
-public class FrameInstanceCreate extends JPanel implements ActionListener {
+public class FrameInstanceCreate extends JPanel implements ActionListener,Panel {
 
 	/**
 	 * 
@@ -23,13 +25,14 @@ public class FrameInstanceCreate extends JPanel implements ActionListener {
 	private JTextField textField;
 	private JButton btn_yes;
 	private JButton btn_back;
+	private JLabel txtWarning = new JLabel("");
 
 	/**
 	 * Create the frame.
 	 */
 	public FrameInstanceCreate() {
-		Launcheur.setFrame("Multibound Reborn - Create Instance",100, 100, 213, 169);
-		setBounds(100, 100, 213, 169);
+		Launcheur.setFrame("Multibound Reborn - Create Instance",100, 100, 213, 211);
+		setBounds(100, 100, 213, 211);
 		setLayout(null);
 		
 		JLabel title = new JLabel("Create Your New Instance");
@@ -49,15 +52,20 @@ public class FrameInstanceCreate extends JPanel implements ActionListener {
 		textField.setColumns(10);
 		
 		btn_yes = new JButton("Accept");
-		btn_yes.setBounds(98, 92, 89, 23);
+		btn_yes.setBounds(100, 135, 89, 23);
 		add(btn_yes);
 		
 		btn_back = new JButton("Back");
-		btn_back.setBounds(9, 92, 79, 23);
+		btn_back.setBounds(10, 135, 79, 23);
 		add(btn_back);
 		
 		btn_back.addActionListener(this);
 		btn_yes.addActionListener(this);
+		txtWarning.setForeground(Color.RED);
+		
+		
+		txtWarning.setBounds(24, 99, 165, 14);
+		add(txtWarning);
 	}
 
 	@Override
@@ -67,8 +75,9 @@ public class FrameInstanceCreate extends JPanel implements ActionListener {
 			Launcheur.setPanel(new Menu());
 		}else if(source.equals(btn_yes)){
 			if(textField.getText().length()!=0) {
-				try{
-		            Ini ini = new Ini(new File("files\\config.ini"));
+	            Ini ini;
+				try {
+					ini = new Ini(new File("files\\config.ini"));
 		            int i=1;
 		            while(ini.get("INSTANCE"+i,"name")!=null) {
 		            	i++;
@@ -79,14 +88,23 @@ public class FrameInstanceCreate extends JPanel implements ActionListener {
 		            ini.put("INSTANCE"+i,"savelocation","default");
 		            ini.store();
 		            Launcheur.setPanel(new EditInst(i,true));
-		        }catch(Exception er){
-		            System.err.println(er.getMessage());
-		        }
+				} catch (IOException e1) {
+					setWarning("config.ini not found");
+					e1.printStackTrace();
+				}
 			}else {
-				//TODO Warning
+				setWarning("Enter a name");
 			}
 			
 		}
+		
+	}
+
+	@Override
+	public void setWarning(String text) {
+		txtWarning.setText(text);
+		txtWarning.setVisible(true);
+		txtWarning.setEnabled(true);
 		
 	}
 }

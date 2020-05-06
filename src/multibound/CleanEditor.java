@@ -21,6 +21,7 @@ public class CleanEditor extends JPanel implements ActionListener {
 	private JButton clean_btn = new JButton("ERROR"),
 			back_btn= new JButton("ERROR"),
 			clean_btn_save= new JButton("ERROR");
+	private static JLabel warning_label = new JLabel("You're about to clean files mods.");
 
 	CleanEditor() {
 		Launcheur.setFrame("Multibound Reborn - Clean Files", 100, 100, 361, 175);
@@ -32,12 +33,12 @@ public class CleanEditor extends JPanel implements ActionListener {
 		title.setBounds(119, 11, 108, 14);
 		add(title);
 
-		JLabel warning_label = new JLabel("You're about to clean files mods.");
+		
 		warning_label.setHorizontalAlignment(SwingConstants.CENTER);
 		warning_label.setBounds(36, 36, 274, 25);
 		add(warning_label);
 
-		JLabel label_1 = new JLabel(" if you want uninstall Multibound Reborn it's imperative.");
+		JLabel label_1 = new JLabel("If you want uninstall Multibound Reborn it's imperative.");
 		label_1.setHorizontalAlignment(SwingConstants.CENTER);
 		label_1.setBounds(24, 64, 285, 14);
 		add(label_1);
@@ -77,7 +78,7 @@ public class CleanEditor extends JPanel implements ActionListener {
 		try {
 			config = new Ini(new File("files/config.ini"));
 		} catch (IOException error) {
-			// TODO Auto-generated catch block
+			warning_label.setText("config.ini not found");
 			error.printStackTrace();
 		}
 		File folder = new File(config.get("OPTIONS", "steamappspath") + "\\workshop\\content\\211820");
@@ -103,12 +104,11 @@ public class CleanEditor extends JPanel implements ActionListener {
 	}
 
 	static public void cleanSave() {
-		// TODO cleanSave
 		Ini config = null;
 		try {
 			config = new Ini(new File("files/config.ini"));
 		} catch (IOException error) {
-			// TODO Auto-generated catch block
+			warning_label.setText("config.ini not found");
 			error.printStackTrace();
 		}
 		String steampath = config.get("OPTIONS", "steamappspath");
@@ -121,7 +121,7 @@ public class CleanEditor extends JPanel implements ActionListener {
 									steampath + "\\common\\Starbound\\storage\\" + f2.getName() + "\\" + f3.getName())
 											.toPath());
 						} catch (IOException e) {
-							// TODO Auto-generated catch block
+							warning_label.setText("Error for Move Save Files");
 							e.printStackTrace();
 						}
 					}

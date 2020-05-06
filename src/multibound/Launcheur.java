@@ -8,14 +8,15 @@ import javax.swing.JPanel;
 
 
 
+
 public class Launcheur{
 
 	private static JPanel panel;
 	private static JFrame frame;
-
+	
 	public static void main(String[] args) {
 		// Initialisation
-		
+		LoadingBar.start();
 		// Menu
 		frame=new JFrame();
 		panel=new Menu();
@@ -30,8 +31,6 @@ public class Launcheur{
 		            System.out.println(c);
 		        }
 		});*///TODO Resize dynamic
-		
-		
 	}
 
 	public static void setPanel(JPanel panel) {
@@ -49,5 +48,4 @@ public class Launcheur{
 	}
 	//TODO Language
 
-	
 }

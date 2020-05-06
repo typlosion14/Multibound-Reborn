@@ -1,5 +1,6 @@
 package multibound;
 
+import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -20,7 +21,6 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 import org.ini4j.Ini;
-import org.ini4j.InvalidFileFormatException;
 
 public class EditInst extends JPanel implements ActionListener, ListSelectionListener, Panel {
 
@@ -29,9 +29,9 @@ public class EditInst extends JPanel implements ActionListener, ListSelectionLis
 	 */
 	private static final long serialVersionUID = 1L;
 	private Instance instance;
-	private JLabel warningText = new JLabel();
-	private JList<Mods> disabledList=  new JList<Mods>(instance.getDesactivedMods(warningText)), 
-				activatedList = new JList<Mods>(instance.getModsList());
+	public JLabel warningText = new JLabel();
+	private JList<Mods> disabledList, 
+						activatedList;
 	private JButton save_btn = new JButton("ERROR"), 
 			back_btn = new JButton("ERROR"), 
 			doubleArrow = new JButton("ERROR"),
@@ -45,6 +45,8 @@ public class EditInst extends JPanel implements ActionListener, ListSelectionLis
 	private JComboBox<String> comboBox;
 
 	EditInst(int INb, boolean a) {
+		
+		//TODO Loading Bar
 		isWorkshop = a;
 		instance = new Instance(INb);
 		if (isWorkshop) {
@@ -80,7 +82,8 @@ public class EditInst extends JPanel implements ActionListener, ListSelectionLis
 
 		comboBox.setBounds(390, 8, 67, 20);
 		add(comboBox);
-
+		
+		
 		if (isWorkshop) {
 			disabledList = new JList<Mods>(instance.getDesactivedWorskshop(warningText));
 			activatedList = new JList<Mods>(instance.getWorkshopList());
@@ -88,7 +91,7 @@ public class EditInst extends JPanel implements ActionListener, ListSelectionLis
 			disabledList = new JList<Mods>(instance.getDesactivedMods(warningText));
 			activatedList = new JList<Mods>(instance.getModsList());
 		}
-
+		setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		disabledList.setLayoutOrientation(JList.HORIZONTAL_WRAP);
 		disabledList.setVisibleRowCount(-1);
 		JScrollPane listScroller = new JScrollPane(disabledList);
@@ -157,6 +160,7 @@ public class EditInst extends JPanel implements ActionListener, ListSelectionLis
 		activatedList.addListSelectionListener(this);
 	}
 
+
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
 		warningText.setVisible(false);
@@ -170,6 +174,7 @@ public class EditInst extends JPanel implements ActionListener, ListSelectionLis
 			if (isWorkshop) {
 				Launcheur.setPanel(new Menu());
 			} else {
+				
 				Launcheur.setPanel(new EditInst(instance.getNumber(), true));
 			}
 
@@ -214,15 +219,11 @@ public class EditInst extends JPanel implements ActionListener, ListSelectionLis
 						}
 					}
 					ini.store();
-				} catch (InvalidFileFormatException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
+					setWarning("config.ini not found");
 					e1.printStackTrace();
 				}
 				if (isWorkshop) {
-
 					Launcheur.setPanel(new EditInst(instance.getNumber(), false));
 				} else {
 					Launcheur.setPanel(new Menu());

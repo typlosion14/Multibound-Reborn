@@ -15,7 +15,6 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import org.ini4j.Ini;
-import org.ini4j.InvalidFileFormatException;
 
 public class ConfigEditor extends JPanel implements ActionListener, Panel {
 
@@ -85,11 +84,8 @@ public class ConfigEditor extends JPanel implements ActionListener, Panel {
 				comboBoxN.setSelectedIndex(0);
 				break;
 			}
-		} catch (InvalidFileFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			setWarning("config.ini not found");
 			e.printStackTrace();
 		}
 		
@@ -138,11 +134,8 @@ public class ConfigEditor extends JPanel implements ActionListener, Panel {
 				if (filepath!=null)
 					ini.put("OPTIONS", "steamappspath", filepath);
 				ini.store();
-			} catch (InvalidFileFormatException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
+				setWarning("config.ini not found");
 				e1.printStackTrace();
 			}
 			

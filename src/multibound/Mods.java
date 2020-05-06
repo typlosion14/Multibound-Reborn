@@ -11,6 +11,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
+
 import org.ini4j.Ini;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -21,6 +22,8 @@ public class Mods implements Comparable<Mods> {
 	private String name;
 	private String filename;
 	private boolean isMod;
+	
+
 	
 	Mods(String id, boolean isMod) {
 		this.isMod = isMod;

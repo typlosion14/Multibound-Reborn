@@ -19,6 +19,17 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.Color;
+import javax.swing.JProgressBar;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.CardLayout;
+import javax.swing.BoxLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
+import javax.swing.SpringLayout;
+import net.miginfocom.swing.MigLayout;
+import java.awt.GridLayout;
 
 public class test {
 
@@ -53,36 +64,16 @@ public class test {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 361, 175);
+		frame.setBounds(100, 100, 310, 101);
 		frame.getContentPane().setBounds(100, 100, 361, 175);
-		frame.getContentPane().setLayout(null);
-
-		JLabel title = new JLabel("Clean files");
-		title.setHorizontalAlignment(SwingConstants.CENTER);
-		title.setBounds(119, 11, 108, 14);
-		frame.getContentPane().add(title);
-
-		JLabel warning_label = new JLabel("You're about to clean files mods.");
-		warning_label.setHorizontalAlignment(SwingConstants.CENTER);
-		warning_label.setBounds(36, 36, 274, 25);
-		frame.getContentPane().add(warning_label);
-
-		JLabel label_1 = new JLabel(" if you want uninstall Multibound Reborn it's imperative.");
-		label_1.setHorizontalAlignment(SwingConstants.CENTER);
-		label_1.setBounds(24, 64, 285, 14);
-		frame.getContentPane().add(label_1);
-
-		JButton back_btn = new JButton("Cancel");
-		back_btn.setBounds(36, 91, 89, 23);
-		frame.getContentPane().add(back_btn);
-
-		JButton clean_btn = new JButton("Mods");
-		clean_btn.setBounds(221, 91, 89, 23);
-		frame.getContentPane().add(clean_btn);
+				frame.getContentPane().setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JButton clean_btn_1 = new JButton("Save");
-		clean_btn_1.setBounds(129, 91, 89, 23);
-		frame.getContentPane().add(clean_btn_1);
+				JLabel title = new JLabel("Clean files");
+				title.setHorizontalAlignment(SwingConstants.CENTER);
+				frame.getContentPane().add(title);
+		
+		JProgressBar progressBar = new JProgressBar();
+		frame.getContentPane().add(progressBar);
 
 		
 		
