@@ -1,4 +1,4 @@
-- [ ] TODO Resize dynamic --> ALL JPanel 
+- [ ] TODO Resize dynamic --> ALL JPanel --> Hard to do
 - [ ] TODO Language --> fr.json etc
 - [X] TODO Warning --> InstanceCreate 
 - [X] TODO Delete Instance --> EditorInstanceView
