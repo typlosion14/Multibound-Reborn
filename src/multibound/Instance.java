@@ -1,6 +1,6 @@
 package multibound;
 
-import java.awt.FlowLayout;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,12 +11,7 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 import java.util.regex.Pattern;
 
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
 
 import org.ini4j.Ini;
 
@@ -24,9 +19,6 @@ public class Instance {
 	private int nb;
 	private String name;
 	private String savelocation, modslist, workshoplist;
-
-	private static JPanel p;
-	private static JFrame f;
 
 	Instance(int nb) {
 		Ini config = new Ini();
@@ -59,7 +51,7 @@ public class Instance {
 		return savelocation;
 	}
 
-	public Mods[] getModsList() {// TODO Loading Bar
+	public Mods[] getModsList() {
 		if (modslist.split(",").length == 1 && modslist.split(",")[0].contains("None")) {
 			return new Mods[0];
 		}
@@ -72,7 +64,7 @@ public class Instance {
 		return list;
 	}
 
-	public Mods[] getWorkshopList() {// TODO Loading Bar
+	public Mods[] getWorkshopList() {
 		if (workshoplist.split(",").length == 1 && workshoplist.split(",")[0].contains("None")) {
 			return new Mods[0];
 		}

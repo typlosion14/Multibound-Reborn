@@ -45,8 +45,6 @@ public class EditInst extends JPanel implements ActionListener, ListSelectionLis
 	private JComboBox<String> comboBox;
 
 	EditInst(int INb, boolean a) {
-		
-		//TODO Loading Bar
 		isWorkshop = a;
 		instance = new Instance(INb);
 		if (isWorkshop) {

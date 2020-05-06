@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -19,6 +20,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
+import org.ini4j.Ini;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -124,11 +126,47 @@ public class ImportInstance extends JPanel implements Panel, ActionListener {
 					JSONArray assets = (JSONArray) jsonObject.get("assetSources");
 					JSONObject temp = (JSONObject) assets.get(0);
 					if (temp.get("blacklist") == null) {
-						// TODO finish blacklist Import JSONArray
+						ArrayList<String> arrayworkshop = new ArrayList<String>();
+						for (Object ass : assets) {
+							if (ass instanceof JSONObject) {
+								String id = (((JSONObject) ass).get("workshopId") != null)
+										? (String) ((JSONObject) ass).get("workshopId")
+										: (String) ((JSONObject) ass).get("id");
+								arrayworkshop.add(id);
+							}
+						}
+						String[] work = new String[arrayworkshop.size()];
+						arrayworkshop.toArray(work);
+						String rW = work[0];
+						for (int i = 1; i < work.length; i++) {
+							rW += "," + work[i];
+						}
+						Ini ini = null;
+						try {
+							ini = new Ini(new File("files\\config.ini"));
+						} catch (IOException e1) {
+							setWarning("config.ini not found");
+							e1.printStackTrace();
+						}
+						int i = 1;
+						while (ini.get("INSTANCE" + i, "name") != null) {
+							i++;
+						}
+						ini.put("INSTANCE" + i, "name", name_field.getText());
+						ini.put("INSTANCE" + i, "workshoplist", rW);
+						ini.put("INSTANCE" + i, "modslist", "None");
+						ini.put("INSTANCE" + i, "savelocation", "default");
+						try {
+							ini.store();
+							setWarning("Done.");
+							System.out.println("Done");
+						} catch (IOException e1) {
+							setWarning("config.ini not found");
+							e1.printStackTrace();
+						}
 					} else {
-						System.out.println(temp.get("blacklist"));
 						JSONArray blacklist = (JSONArray) temp.get("blacklist");
-						String[] idblack = new String[blacklist.size()];
+
 						ArrayList<String> arrayblack = new ArrayList<String>();
 						ArrayList<String> arrayworkshop = new ArrayList<String>();
 						Mods[] workshoplist = Instance.getWorkshopFile(txtWarning);
@@ -136,12 +174,57 @@ public class ImportInstance extends JPanel implements Panel, ActionListener {
 							arrayworkshop.add(Integer.toString(workshoplist[i].getId()));
 						}
 						for (int i = 0; i < blacklist.size(); i++) {
-							if (Integer.parseInt((String) blacklist.get(i)) > 0) {
-								arrayblack.add((String) blacklist.get(i));
+							try {
+								if (Integer.parseInt((String) blacklist.get(i)) > 0) {
+									arrayblack.add((String) blacklist.get(i));
+								}
+							} catch (NumberFormatException er) {
+								System.out.println(er);
+							}
+
+						}
+						String[] idblack = new String[arrayblack.size()];
+						arrayblack.toArray(idblack);
+						System.out.println(idblack);
+						for (String id : idblack) {
+							for (int y = 0; y < arrayworkshop.size(); y++) {
+								System.out.println(
+										arrayworkshop.size() + " " + y + " " + id + " " + arrayworkshop.get(y));
+								if (id.contains(arrayworkshop.get(y))) {
+									arrayworkshop.remove(y);
+									y--;
+								}
 							}
 						}
-						// TODO finish blacklsit de mort
-						arrayblack.toArray(idblack);
+						String[] r = new String[arrayworkshop.size()];
+						arrayworkshop.toArray(r);
+						String rW = r[0];
+						for (int i = 1; i < r.length; i++) {
+							rW += "," + r[i];
+						}
+						Ini ini = null;
+						try {
+							ini = new Ini(new File("files\\config.ini"));
+						} catch (IOException e1) {
+							setWarning("config.ini not found");
+							e1.printStackTrace();
+						}
+						int i = 1;
+						while (ini.get("INSTANCE" + i, "name") != null) {
+							i++;
+						}
+						ini.put("INSTANCE" + i, "name", name_field.getText());
+						ini.put("INSTANCE" + i, "workshoplist", rW);
+						ini.put("INSTANCE" + i, "modslist", "None");
+						ini.put("INSTANCE" + i, "savelocation", "default");
+						try {
+							ini.store();
+							setWarning("Done.");
+							System.out.println("Done");
+						} catch (IOException e1) {
+							setWarning("config.ini not found");
+							e1.printStackTrace();
+						}
 
 					}
 				} catch (FileNotFoundException e1) {

@@ -1,16 +1,11 @@
 package multibound;
 
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.awt.event.ActionEvent;
-import java.awt.Component;
 import java.awt.Font;
 import java.awt.Label;
-import java.awt.Rectangle;
 
 public class Menu extends JPanel implements ActionListener {
 	/**
