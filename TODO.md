@@ -7,7 +7,7 @@
 - [ ] TODO catch transform in warning (or maybe a logs.txt) --> ALL --> Mods Instance Menu
 - [ ] LITE TODO regex --> Instance
 - [X] TODO clean Save --> Move All save files in default for clean--> CleanEditor
-- [ ] TODO blacklist compatibility -->ImportInstance
+- [X] TODO blacklist compatibility -->ImportInstance
 - [X] TODO InstanceName delete .Disabled. and .disabled
 - [X] TODO Edit Launcheur
 - [X] TODO Loading bar when loading Steam name --> Can Be better
