@@ -1,6 +1,6 @@
 - [ ] TODO Resize dynamic --> ALL JPanel 
 - [ ] TODO Language --> fr.json etc
-- [ ] TODO Warning --> InstanceCreate 
+- [X] TODO Warning --> InstanceCreate 
 - [X] TODO Delete Instance --> EditorInstanceView
 - [X] URGENT TODO if savelocation change --> Move files in the default save location -->(Maybe a warning like: "Are you sure to do that ?" also)
 -->EditorInstance
@@ -10,4 +10,4 @@
 - [ ] TODO blacklist compatibility -->ImportInstance
 - [X] TODO InstanceName delete .Disabled. and .disabled
 - [X] TODO Edit Launcheur
-- [ ] TODO Loading bar when loading Steam name
+- [X] TODO Loading bar when loading Steam name --> Can Be better
