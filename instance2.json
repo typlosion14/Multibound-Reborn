@@ -1,0 +1,733 @@
+{
+    "info" : {
+        "name" : "Future Twink",
+        "windowTitle" : "Starbound - Future Twink",
+        "workshopLink" : "http://steamcommunity.com/sharedfiles/filedetails/?id=1306293398"
+    },
+    "savePath" : "inst:/storage/",
+    "channel"  : "stable",
+    "assetSources" : [
+        {
+            "type" : "workshopAuto",
+            "id"   : "1685198972",
+            "friendlyName" : "(FU) Music Player Addon \"Deltarune\""
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1685200084",
+            "friendlyName" : "(FU) Music Player Addon \"Hiveswap\""
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1685217813",
+            "friendlyName" : "(FU) Music Player Addon \"Undertale\""
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "753790671",
+            "friendlyName" : "A.V.I.A.N."
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1507128245",
+            "friendlyName" : "Ability Slot Extender"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1507129419",
+            "friendlyName" : "Ability Slot Extender FU Patch"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "745849653",
+            "friendlyName" : "AltEyes - Floran"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "884133702",
+            "friendlyName" : "Alternate Avian Eyes"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "729842601",
+            "friendlyName" : "Anime Eyes for Humans"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "740694177",
+            "friendlyName" : "Argonian Race Redux"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1496909703",
+            "friendlyName" : "Asra's Katana"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1154799233",
+            "friendlyName" : "Augment Slots for Armor Redux"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "729599895",
+            "friendlyName" : "Automatic Doors"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "729558042",
+            "friendlyName" : "Avali (Triage) Race Mod"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1153717308",
+            "friendlyName" : "Avali Equipment Bench"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1636662922",
+            "friendlyName" : "Avali Plus"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1495176820",
+            "friendlyName" : "Avali more colors"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1394999146",
+            "friendlyName" : "AvaliFit (TM)"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1133358548",
+            "friendlyName" : "Better Chains"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "731016710",
+            "friendlyName" : "Blood Mod"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1334328245",
+            "friendlyName" : "Character Creation Extender from [Penguin Piracy mod]"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "731044896",
+            "friendlyName" : "Compact Crops"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1292255989",
+            "friendlyName" : "Custom Collections Frackin' Universe Patch"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "760881689",
+            "friendlyName" : "Custom Collections UI"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1102394541",
+            "friendlyName" : "Customizable Shuttlecraft"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1594664484",
+            "friendlyName" : "Cuter Felin"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1298333785",
+            "friendlyName" : "Delusive Dimensions [ALPHA]"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "729746228",
+            "friendlyName" : "Disabled drop for Survival Mode"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1243697034",
+            "friendlyName" : "Draconis Full Dragons alt. Reskin"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "868165595",
+            "friendlyName" : "Draconis Race(Humanoid Dragon Race)"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "823522792",
+            "friendlyName" : "Dye Station"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1762894559",
+            "friendlyName" : "EZ Mech Deployer"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1499728200",
+            "friendlyName" : "Elder Fluid Sea Return"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1117006719",
+            "friendlyName" : "Everis (Canine Humanoids) Race Mod"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "899795176",
+            "friendlyName" : "Extended Story"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "729791646",
+            "friendlyName" : "Extra Zoom Levels"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1411331676",
+            "friendlyName" : "FU/ztarbound S.A.I.L. Modded Race Support"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1554563232",
+            "friendlyName" : "Factions (Early Access)"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "729597107",
+            "friendlyName" : "Familiars Race"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1403152404",
+            "friendlyName" : "Faster Start"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "729429063",
+            "friendlyName" : "Felin"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "729427301",
+            "friendlyName" : "Felin Costumes+"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "729429377",
+            "friendlyName" : "Felin Fur+"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "732985336",
+            "friendlyName" : "Felin Objects+"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "835850220",
+            "friendlyName" : "Felin intro mission"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1232194026",
+            "friendlyName" : "Felins for SpawnableItemsPack"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1560259255",
+            "friendlyName" : "Follower Health Bars"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "729427436",
+            "friendlyName" : "Food Stack"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "729492703",
+            "friendlyName" : "Frackin' Music"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "763259329",
+            "friendlyName" : "Frackin' Races"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "729480149",
+            "friendlyName" : "Frackin' Universe"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "729428280",
+            "friendlyName" : "Gardenbot2 : Reboot Edition"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1612579544",
+            "friendlyName" : "Give the avian oculemonade"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1341717258",
+            "friendlyName" : "Humanoid Familiar"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "731354142",
+            "friendlyName" : "Improved Food Descriptions"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1117985463",
+            "friendlyName" : "Improved Ship Encounter Descriptions"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1414322416",
+            "friendlyName" : "Improved turrets"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "729427744",
+            "friendlyName" : "Instant Crafting"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1197807491",
+            "friendlyName" : "Kemono Race Mod (Fix)"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1475245421",
+            "friendlyName" : "Landable Gas Giants"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1410330646",
+            "friendlyName" : "Make the Saturnians a Cuter Yet Mothy Race"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1381782704",
+            "friendlyName" : "Mauskin"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "951697307",
+            "friendlyName" : "Mech Random Blueprint Fix"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1390490083",
+            "friendlyName" : "More NPC Ships"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1117007107",
+            "friendlyName" : "More Planet Info (work with 1.4.X not guaranteed)"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1639501560",
+            "friendlyName" : "More Planet Info - FU Patch"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1761193918",
+            "friendlyName" : "More Planet Info Lush Planet fix(Works with FU)"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1772643711",
+            "friendlyName" : "More Planet Info [1.4 Quest Marker Fix]"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1733755757",
+            "friendlyName" : "More Planet Info- Saturnians Addon"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "886395177",
+            "friendlyName" : "More Terraformers"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1626143257",
+            "friendlyName" : "Natural Slopes -Such 45* Angles, much smooth."
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "942632292",
+            "friendlyName" : "No More Mech Helmet"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "895140470",
+            "friendlyName" : "NpcSpawner+"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1151919681",
+            "friendlyName" : "Open the Hatches!"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "731058758",
+            "friendlyName" : "Ore Plants+ (RAMs version)"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "730378641",
+            "friendlyName" : "Perennial Crops"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "732277574",
+            "friendlyName" : "Perennial Crops FU Compatibility Patch Edition"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1253782150",
+            "friendlyName" : "Player Dances and Emotes"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "951476104",
+            "friendlyName" : "Portable Tech + Teleporter Console"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1632807184",
+            "friendlyName" : "Procedural Katanas"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1286222045",
+            "friendlyName" : "Protectorate splash screen"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1263189711",
+            "friendlyName" : "Quarrelsome Creatures"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1265078542",
+            "friendlyName" : "Quarrelsome Creatures - Frackin' Universe Addon"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1471069017",
+            "friendlyName" : "Quickbar Music Player (FU)"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1115920474",
+            "friendlyName" : "RPG Growth"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1519391248",
+            "friendlyName" : "Return to Earth"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1070172836",
+            "friendlyName" : "Role-Play Emotes"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "947922190",
+            "friendlyName" : "S.A.I.L. chips megapack"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "947429656",
+            "friendlyName" : "Scripted Artificial Intelligence Lattice (Customisable A.I.!)"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1653929612",
+            "friendlyName" : "Shellguard Patch for Spawnable Items Pack"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1563376005",
+            "friendlyName" : "Shellguard: Starbound Expansion Remastered"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1165402390",
+            "friendlyName" : "Shuttlecraft Deployment"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "729428037",
+            "friendlyName" : "Skippable Cinematics"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1146396826",
+            "friendlyName" : "Skittles Outfit Modpack"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1732808640",
+            "friendlyName" : "Smart Crew"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "733665104",
+            "friendlyName" : "Spawnable Item Pack"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1647206751",
+            "friendlyName" : "Spawnable Item Pack - Frackin'Universe Patch"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1412545702",
+            "friendlyName" : "Spawnable Item Pack: Avali Patch"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1412550555",
+            "friendlyName" : "Spawnable Item Pack: Viera of Ivalice"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1625893543",
+            "friendlyName" : "Spawnable Items Pack: Saturnian Race Patch"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "764887546",
+            "friendlyName" : "StardustLib"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1660547150",
+            "friendlyName" : "The Essential Galactic Cruise"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1545962203",
+            "friendlyName" : "The Forge: Healer's Toolkit"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1502658310",
+            "friendlyName" : "The Forge: Protector's Broadsword+"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1529649528",
+            "friendlyName" : "The Forge: Vanguard's Pride"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "730849360",
+            "friendlyName" : "The Pony Modpack"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1103027918",
+            "friendlyName" : "The Saturnians"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1405753979",
+            "friendlyName" : "The Tenantator"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "732276079",
+            "friendlyName" : "The Viera of Ivalice"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "874013371",
+            "friendlyName" : "United Systems Expansion - [DECOMMISSIONED]"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1397706778",
+            "friendlyName" : "United Systems Expansion: Planets Addon"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1416282371",
+            "friendlyName" : "United Systems Expansion: Vehicles Addon - Tanks, a cannon and a car!"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "729532886",
+            "friendlyName" : "Universal Uncrafter"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1372376485",
+            "friendlyName" : "Wardrobe - Avali (Triage)"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1637533409",
+            "friendlyName" : "Wardrobe - Avali Plus"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1373929504",
+            "friendlyName" : "Wardrobe - Elithian Races"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1372369380",
+            "friendlyName" : "Wardrobe - Frackin' Universe"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1637618267",
+            "friendlyName" : "Wardrobe - Shellguard"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1372956526",
+            "friendlyName" : "Wardrobe - Skittles Mega Pack"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1372379877",
+            "friendlyName" : "Wardrobe - The Viera of Ivalice"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "734855062",
+            "friendlyName" : "Wardrobe Interface"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1507130642",
+            "friendlyName" : "Weapon Retrofitting Station"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1218671249",
+            "friendlyName" : "WolFen FLCN-11 Gunship"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "754503264",
+            "friendlyName" : "XS Mechs - Reduced Energy Usage"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "729428991",
+            "friendlyName" : "XS Mechs - Vehicle Edition"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "945707062",
+            "friendlyName" : "XS Mechs : Modular Edition (BETA)"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "958539829",
+            "friendlyName" : "XS Mechs : Modular Weapons+ Pack"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "740834534",
+            "friendlyName" : "ZZ Mech Modifications"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1194878261",
+            "friendlyName" : "[OFFICIAL] FU BYOS Modded Race Patch (FR Supported Races)"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1432794738",
+            "friendlyName" : "avali camps on frackin' planets"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "882900100",
+            "friendlyName" : "bk3k's Inventory"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "850618279",
+            "friendlyName" : "bk3k's variable planet sizes"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1432556830",
+            "friendlyName" : "felin towns on frackin' planets"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "743328719",
+            "friendlyName" : "nonuniform"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "962379099",
+            "friendlyName" : "Species Clothing"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1588621909",
+            "friendlyName" : "More active crew members!"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1733089348",
+            "friendlyName" : "eStyleMonsters - Globaura"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1798152971",
+            "friendlyName" : "Spawnable Items Pack: Elithian Races Starbound Mod Patch"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1801681923",
+            "friendlyName" : "Avali WolFen FLCN-11 Gunship"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "732452461",
+            "friendlyName" : "Bunnykin Race"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "821455287",
+            "friendlyName" : "Frackin' Action Bars"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "731220462",
+            "friendlyName" : "Enhanced Storage"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1114277962",
+            "friendlyName" : "Outpost Shuttlecraft"
+        },
+        {
+            "type" : "workshopAuto",
+            "id"   : "1597901084",
+            "friendlyName" : "Deerkin"
+        },
+        "sb:/mods/",
+        "inst:/mods"
+    ]
+}
