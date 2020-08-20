@@ -89,7 +89,7 @@ public class Menu extends JPanel implements ActionListener {
 		} else if (source.equals(config_buttonClean)) {
 			Launcheur.setPanel(new CleanEditor());
 		} else if (source.equals(config_buttonEdit)) {
-			Launcheur.setPanel(new ConfigEditor());
+			Launcheur.setPanel(new ConfigEditor(""));
 		} else if (source.equals(other_buttonImport)) {
 			Launcheur.setPanel(new ImportInstance());
 		} else {
