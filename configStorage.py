@@ -324,6 +324,9 @@ def init():
         logging.basicConfig(filename='files/logs/Launcheur.txt', format='%(asctime)s %(levelname)s:%(message)s',
                             datefmt='%I:%M:%S %p', level=logging.DEBUG)
     logging.info('----Launcheur start----')
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    logging.debug('Actual Directory: '+os.getcwd())
+    logging.debug('File Directory: ' + dir_path)
     config = cp.ConfigParser()
     try:
         config.read_file(open('files/config.ini'))
