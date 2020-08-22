@@ -57,7 +57,7 @@ def LoadingInstance():
     config = cp.ConfigParser()
     config.read_file(open('files/config.ini'))
     dic = {}
-    logging.debug(Config.InstanceNumber + "instance to load")
+    logging.debug(str(Config.InstanceNumber) + "instance to load")
     try:
         for i in range(0, Config.InstanceNumber):
             try:
