@@ -1,11 +1,13 @@
 import configparser as cp
 import os
+import logging
 
 from CobraLib import StringToList
 from libCollectionSteam import TitleWorkshop, MultipleTitleWorkshop
 
 
 class Translate:
+
     def template(self=''):
         if Config.TranslateConfig == "fr":
             return
@@ -312,11 +314,36 @@ class Translate:
 
 
 def init():
+    try:
+        logging.basicConfig(filename='files/logs/Launcheur.txt', format='%(asctime)s %(levelname)s:%(message)s',
+                            datefmt='%I:%M:%S %p', level=logging.DEBUG)
+    except FileNotFoundError:
+        os.makedirs("files/logs/")
+        f = open("files/logs/Launcheur.txt", "a")
+        f.close()
+        logging.basicConfig(filename='files/logs/Launcheur.txt', format='%(asctime)s %(levelname)s:%(message)s',
+                            datefmt='%I:%M:%S %p', level=logging.DEBUG)
+    logging.info('----Launcheur start----')
     config = cp.ConfigParser()
     try:
         config.read_file(open('files/config.ini'))
-    except:
-        return ("files/config.ini Not Found")
+    except FileNotFoundError:
+        if not os.path.exists("files/"):
+            os.mkdir("files/")
+        f = open("files/config.ini", "a")
+        f.write("""[OPTIONS]
+steamappspath = C:\\\\Program Files (x86)\\\\Steam\\\\steamapps
+unstable = False
+language = en
+editormode = 1
+[INSTANCE1]
+name = Vanilla
+workshoplist = None
+modslist = None
+savelocation = default""")
+        f.close()
+        logging.warning('files/config.ini has been created because it can\'t be found')
+        config.read_file(open('files/config.ini'))
     Config.OriginPath = os.getcwd()
     Config.InstanceNumber = int(len(config.sections()[1:]))
     try:
@@ -329,13 +356,15 @@ def init():
         Config.ShowMode = str(config.get('OPTIONS', 'editormode'))
     try:
         SteamAppsPath = config.get('OPTIONS', 'SteamAppsPath').replace("\\\\", '\\').replace("\\:", ":")
-        os.chdir(SteamAppsPath + "\\workshop\content\\211820")
-        os.chdir(SteamAppsPath + "\\common\Starbound")  # Unstable change todo
+        os.chdir(SteamAppsPath + "\\workshop\\content\\211820")
+        os.chdir(SteamAppsPath + "\\common\\Starbound")  # Unstable change todo
         os.chdir(SteamAppsPath)
         Config.SteamAppsPath = SteamAppsPath
         os.chdir(Config.OriginPath)
-    except:
+    except FileNotFoundError:
+        logging.error("SteamApps path is incorrect")
         return Translate.SteamAppsPath()
+    logging.info(Translate.SuccessfulLoading())
     return Translate.SuccessfulLoading()
 
 
@@ -346,7 +375,7 @@ class Config:
     SteamAppsPath = "D:\SteamLibrary\steamapps"
     OriginPath = ".\\"
     ShowMode = "1"
-    Version = "2.0.0"
+    Version = "2.1.1"
 
 
 def pageShow(pgnb, modsList):

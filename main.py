@@ -3,16 +3,21 @@ import webbrowser
 import os
 import json
 import shutil
+import logging
+
 from CobraLib import directSearch, importjson, pakSearch
 from configStorage import Config, Translate, init
 from secret import key
 
 
 def ChooseYourInstance(dic):
+    logging.basicConfig(filename='files/logs/Launcheur.txt', format='%(asctime)s %(levelname)s:%(message)s',
+                        datefmt='%I:%M:%S %p', level=logging.DEBUG)
     try:
         for i in range(0, len(dic)):
             print(str(i + 1) + " " + dic['Instance' + str(i + 1)][0])
     except:
+        logging.error(Translate.ErrorInstance())
         return Translate.ErrorInstance()
     try:
         choice = int(input(Translate.ChooseInstanceMain()))
@@ -47,9 +52,12 @@ def CheckUpdate():
 
 
 def LoadingInstance():
+    logging.basicConfig(filename='files/logs/Launcheur.txt', format='%(asctime)s %(levelname)s:%(message)s',
+                        datefmt='%I:%M:%S %p', level=logging.DEBUG)
     config = cp.ConfigParser()
     config.read_file(open('files/config.ini'))
     dic = {}
+    logging.debug(Config.InstanceNumber + "instance to load")
     try:
         for i in range(0, Config.InstanceNumber):
             try:
@@ -60,16 +68,21 @@ def LoadingInstance():
             except:
                 dic['Instance' + str(i + 1)] = config.get('INSTANCE' + str(i + 1), 'Name'), config.get(
                     'INSTANCE' + str(i + 1), 'workshoplist'), config.get('INSTANCE' + str(i + 1), 'ModsList'), 'default'
+            logging.debug(dic['Instance' + str(i + 1)])
     except:
+        logging.error(Translate.ErrorInstance())
         return Translate.ErrorInstance()
     return ChooseYourInstance(dic)
 
 
 def InstanceAppli(ch, dic):
+    logging.basicConfig(filename='files/logs/Launcheur.txt', format='%(asctime)s %(levelname)s:%(message)s',
+                        datefmt='%I:%M:%S %p', level=logging.DEBUG)
     InstanceLoad = dic['Instance' + str(ch)]
     Workshop = InstanceLoad[1].split(',')
     ModLoad = InstanceLoad[2].split(',')
     saveLocation = InstanceLoad[3]
+    logging.info("Move workshop mods selected by the Instance")
     try:  # Changer les mods du workshop
         direc = directSearch(Config.SteamAppsPath + "\\workshop\content\\211820")
         os.chdir(Config.SteamAppsPath + "\\workshop\content\\211820")
@@ -85,8 +98,9 @@ def InstanceAppli(ch, dic):
             if ("Disabled." + Workshop[i]) in direc:
                 os.rename("Disabled." + Workshop[i], Workshop[i])
     except:
-
+        logging.error(Translate.WorkshopError())
         return Translate.WorkshopError()
+    logging.info("Move mods selected by the Instance")
     try:  # changer les mods
         direc = directSearch(Config.SteamAppsPath + "\\common\Starbound\mods") + pakSearch(
             Config.SteamAppsPath + "\common\\Starbound\mods")
@@ -103,7 +117,9 @@ def InstanceAppli(ch, dic):
             if (".Disabled." + ModLoad[i]) in direc:
                 os.rename(".Disabled." + ModLoad[i], ModLoad[i])
     except:
+        logging.error(Translate.ModError())
         return Translate.ModError()
+    logging.info("Move save file")
     if saveLocation != "default":
         try:
             os.makedirs(Config.SteamAppsPath + "\\common\Starbound\InstanceSave\\" + str(ch))
@@ -115,9 +131,13 @@ def InstanceAppli(ch, dic):
             os.replace(Config.SteamAppsPath + "\\common\Starbound\InstanceSave\\" + str(ch),
                        Config.SteamAppsPath + "\\common\Starbound\\storage")
         except:
+            logging.error(Translate.BugMoveFile())
             return Translate.BugMoveFile()
     print(Translate.LaunchStarbound())
+    logging.info("Launching Starbound...")
     os.system('"' + Config.SteamAppsPath + '\\common\Starbound\win64\starbound.exe"')  # Lance le jeu
+    logging.info("Starbound closed")
+    logging.info("Start renaming back workshop mods")
     # Annule les changements
     direc = directSearch(Config.SteamAppsPath + "\\workshop\content\\211820")
     os.chdir(Config.SteamAppsPath + "\\workshop\content\\211820")
@@ -125,6 +145,7 @@ def InstanceAppli(ch, dic):
         if direc[i].startswith("Disabled."):
             NewName = str(direc[i][direc[i].find('.') + 1:])
             os.rename(direc[i], NewName)
+    logging.info("Start renaming back mods")
     direc = directSearch(Config.SteamAppsPath + "\\common\Starbound\mods") + pakSearch(
         Config.SteamAppsPath + "\common\\Starbound\mods")
     os.chdir(Config.SteamAppsPath + "\\common\Starbound\mods")
@@ -133,11 +154,13 @@ def InstanceAppli(ch, dic):
             NewName = str(direc[i][direc[i].find('.Disabled.') + len(".Disabled."):])
             os.rename(direc[i], NewName)
     # SaveLocation
+    logging.info("Move back save files")
     if saveLocation != "default":
         os.replace(Config.SteamAppsPath + "\\common\Starbound\\storage",
                    Config.SteamAppsPath + "\\common\Starbound\InstanceSave\\" + str(ch))
         os.replace(Config.SteamAppsPath + "\\common\Starbound\InstanceSave\\storage",
                    Config.SteamAppsPath + "\\common\Starbound\\storage")
+    logging.info("-----Finish perfectly-----")
     return "See you later!"
 
 
@@ -148,8 +171,8 @@ def ListeCreator(dic):
     return AllName
 
 
-print(CheckUpdate())
 print(init())
+print(CheckUpdate())
 inst = LoadingInstance()
 print(inst[0])
 print(InstanceAppli(inst[1], inst[2]))
