@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.SwingWorker;
 
+import org.apache.log4j.Logger;
 import org.ini4j.Ini;
 import org.ini4j.InvalidFileFormatException;
 
@@ -23,6 +24,7 @@ public class LoadingBar extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JProgressBar progressBar;
 	public static MonSwingWorker swingWorker;
+	public static Logger log = Logger.getLogger(Logger.class.getName());
 
 	class MonSwingWorker extends SwingWorker<Integer, String> {
 		JFrame marcehsp;
@@ -41,65 +43,82 @@ public class LoadingBar extends JFrame {
 				folder = new File(config.get("OPTIONS", "steamappspath") + "\\workshop\\content\\211820");
 			} catch (InvalidFileFormatException e) {
 				// TODO Auto-generated catch block
+				log.warn("config.ini Invalid File Format (LoadingBar)");
 				e.printStackTrace();
 				return null;
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				log.warn("config.ini not found (LoadingBar)");
 				return null;
 			}
-
+			log.info("get Workshop Mods list LoadingBar");
 			ArrayList<String> listFiles = new ArrayList<String>();
 			for (File file : folder.listFiles()) {
 				if (file.isDirectory()) {
+					
 					listFiles.add(file.getName());
 				}
 			}
+			
 			String[] simpleArray = new String[listFiles.size()];
 			listFiles.toArray(simpleArray);
 			progressBar.setMaximum(simpleArray.length);
 			Mods[] list = new Mods[simpleArray.length];
+			log.info("Start loading Workshop Mods  (LoadingBar)");
 			for (int i = 0; i < simpleArray.length; i++) {
 				list[i] = new Mods(simpleArray[i], false);
 				setProgress(i/simpleArray.length*100);
 				progressBar.setValue(i);
 			}
+			log.info("Loading Workshop Mods is successful  (LoadingBar)");
 			setProgress(0);
 			progressBar.setValue(0);
 			try {
-				config = new Ini(new File("files/config.ini"));
+				if (new File("files/config.ini").exists()) {
+					config = new Ini(new File("files/config.ini"));
+				}else {
+					log.error("config.ini not found (LoadingBar)");
+				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				log.error("config.ini not found (LoadingBar)");
+			}
+			if (new File(config.get("OPTIONS", "steamappspath")).exists()) {
+				
+			}else {
+				log.error("Steam Apps Path don't exist (LoadingBar)");
 			}
 			try {
-				File test = new File(config.get("OPTIONS", "steamappspath"));
-				test.getName();
+				if(new File(config.get("OPTIONS", "steamappspath") + "\\common\\Starbound\\mods").exists()) {
+					folder = new File(config.get("OPTIONS", "steamappspath") + "\\common\\Starbound\\mods");
+				}else {
+					log.error("Starbound/mods path is not correct (LoadingBar)");
+				}
 			} catch (NullPointerException e) {
-				;
+				log.error("Starbound/mods path is not correct (LoadingBar)");
 			}
-			try {
-				folder = new File(config.get("OPTIONS", "steamappspath") + "\\common\\Starbound\\mods");
-
-			} catch (Exception e) {
-				;
-			}
+			log.info("get Mods list (LoadingBar)");
 			listFiles = new ArrayList<String>();
 			for (File file : folder.listFiles()) {
 				if (file.isDirectory() || file.getName().endsWith(".pak")) {
 					listFiles.add(file.getName());
+					log.debug(file.getName()+" found");
 				}
 			}
 			simpleArray = new String[listFiles.size()];
 			listFiles.toArray(simpleArray);
 			progressBar.setMaximum(simpleArray.length);
 			list = new Mods[simpleArray.length];
+			log.info("Start loading Mods LoadingBar (LoadingBar)");
 			for (int i = 0; i < simpleArray.length; i++) {
 				list[i] = new Mods(simpleArray[i], true);
 				setProgress(i/simpleArray.length*100);
 				progressBar.setValue(i);
 
 			}
+			log.info("Loading Mods is successful (LoadingBar)");
 			done();
 			return 0;
 		}
@@ -119,6 +138,7 @@ public class LoadingBar extends JFrame {
 
 
 			} catch (Exception e) {
+				log.warn("LoadingBar can't be termined (LoadingBar)");
 				e.printStackTrace();
 			}
 

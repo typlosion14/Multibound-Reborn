@@ -4,6 +4,7 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
+import org.apache.log4j.Logger;
 import org.ini4j.Ini;
 
 import javax.swing.JTextField;
@@ -26,6 +27,7 @@ public class FrameInstanceCreate extends JPanel implements ActionListener,Panel 
 	private JButton btn_yes;
 	private JButton btn_back;
 	private JLabel txtWarning = new JLabel("");
+	public static Logger log = Logger.getLogger(Logger.class.getName());
 
 	/**
 	 * Create the frame.
@@ -87,9 +89,11 @@ public class FrameInstanceCreate extends JPanel implements ActionListener,Panel 
 		            ini.put("INSTANCE"+i,"modslist","None");
 		            ini.put("INSTANCE"+i,"savelocation","default");
 		            ini.store();
+		            log.info("Create the Instance "+textField.getText());
 		            Launcheur.setPanel(new EditInst(i,true));
 				} catch (IOException e1) {
 					setWarning("config.ini not found");
+					log.warn("Config.ini not found (FrameInstanceCreate btn_yes)");
 					e1.printStackTrace();
 				}
 			}else {

@@ -171,7 +171,7 @@ public class ImportInstance extends JPanel implements Panel, ActionListener {
 						ArrayList<String> arrayworkshop = new ArrayList<String>();
 						Mods[] workshoplist = Instance.getWorkshopFile(txtWarning);
 						for (int i = 0; i < workshoplist.length; i++) {
-							arrayworkshop.add(Integer.toString(workshoplist[i].getId()));
+							arrayworkshop.add(Long.toString(workshoplist[i].getId()));
 						}
 						for (int i = 0; i < blacklist.size(); i++) {
 							try {

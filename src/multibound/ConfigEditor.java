@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import org.apache.log4j.Logger;
 import org.ini4j.Ini;
 
 public class ConfigEditor extends JPanel implements ActionListener, Panel {
@@ -31,8 +32,9 @@ public class ConfigEditor extends JPanel implements ActionListener, Panel {
 	private JComboBox<String> comboBoxN,
 		comboBoxL;
 	private String filepath=null;
+	public static Logger log = Logger.getLogger(Logger.class.getName());
 
-	ConfigEditor() {
+	ConfigEditor(String warning) {
 		Launcheur.setFrame("Multibound Reborn - Config", 100, 100, 361, 342);
 		setBounds(100, 100, 361, 342);
 		setLayout(null);
@@ -85,6 +87,7 @@ public class ConfigEditor extends JPanel implements ActionListener, Panel {
 				break;
 			}
 		} catch (IOException e) {
+			log.warn("Config.ini  (ConfigEditor) not found");
 			setWarning("config.ini not found");
 			e.printStackTrace();
 		}
@@ -98,8 +101,11 @@ public class ConfigEditor extends JPanel implements ActionListener, Panel {
 		fc.setCurrentDirectory(new File(System.getProperty("user.home")));//D:\\Steam\\steamapps
 		fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
-		txtWarning = new JLabel("");
-		txtWarning.setEnabled(false);
+		txtWarning = new JLabel(warning);
+		if(warning=="") {
+			txtWarning.setEnabled(false);
+		}
+		
 		txtWarning.setForeground(Color.RED);
 		txtWarning.setBounds(50, 204, 247, 14);
 		add(txtWarning);
@@ -135,6 +141,7 @@ public class ConfigEditor extends JPanel implements ActionListener, Panel {
 					ini.put("OPTIONS", "steamappspath", filepath);
 				ini.store();
 			} catch (IOException e1) {
+				log.warn("Config.ini (ConfigEditor save_btn) not found");
 				setWarning("config.ini not found");
 				e1.printStackTrace();
 			}
@@ -173,14 +180,17 @@ public class ConfigEditor extends JPanel implements ActionListener, Panel {
 				if(work && star) {
 					txtWarning.setForeground(Color.GREEN);
 					setWarning("Location accepted!");
+					log.info("The Steamapps path is correct. (ConfigEditor)");
 				}else{
 					if(!work) {
 						txtWarning.setForeground(Color.RED);
 						alert+="\\workshop\\content introuvable\n";
+						log.error("The workshop path is not correct. (ConfigEditor)");
 					}
 					if(!star) {
 						txtWarning.setForeground(Color.RED);
 						alert+="\\common\\Starbound introuvable";
+						log.error("The Starbound path is not correct. (ConfigEditor)");
 					}
 					setWarning(alert);
 				}

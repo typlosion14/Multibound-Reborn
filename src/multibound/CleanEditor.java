@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import org.apache.log4j.Logger;
 import org.ini4j.Ini;
 
 public class CleanEditor extends JPanel implements ActionListener {
@@ -22,6 +23,7 @@ public class CleanEditor extends JPanel implements ActionListener {
 			back_btn= new JButton("ERROR"),
 			clean_btn_save= new JButton("ERROR");
 	private static JLabel warning_label = new JLabel("You're about to clean files mods.");
+	public static Logger log = Logger.getLogger(Logger.class.getName());
 
 	CleanEditor() {
 		Launcheur.setFrame("Multibound Reborn - Clean Files", 100, 100, 361, 175);
@@ -80,6 +82,7 @@ public class CleanEditor extends JPanel implements ActionListener {
 		} catch (IOException error) {
 			warning_label.setText("config.ini not found");
 			error.printStackTrace();
+			log.warn("Config.ini not found (CleanEditor.clean)");
 		}
 		File folder = new File(config.get("OPTIONS", "steamappspath") + "\\workshop\\content\\211820");
 		for (File file : folder.listFiles()) {
@@ -109,6 +112,7 @@ public class CleanEditor extends JPanel implements ActionListener {
 			config = new Ini(new File("files/config.ini"));
 		} catch (IOException error) {
 			warning_label.setText("config.ini not found");
+			log.warn("Config.ini not found (CleanEditor.cleanSave)");
 			error.printStackTrace();
 		}
 		String steampath = config.get("OPTIONS", "steamappspath");
@@ -122,6 +126,7 @@ public class CleanEditor extends JPanel implements ActionListener {
 											.toPath());
 						} catch (IOException e) {
 							warning_label.setText("Error for Move Save Files");
+							log.error("Can't move save files (CleanEditor.cleanSave)");
 							e.printStackTrace();
 						}
 					}

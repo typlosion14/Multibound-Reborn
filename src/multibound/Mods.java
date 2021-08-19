@@ -11,30 +11,38 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
-
+import org.apache.log4j.Logger;
 import org.ini4j.Ini;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 public class Mods implements Comparable<Mods> {
-	private int id;
+	private long id;
 	private String name;
 	private String filename;
 	private boolean isMod;
+	public static Logger log = Logger.getLogger(Logger.class.getName());
 	
 
 	
 	Mods(String id, boolean isMod) {
 		this.isMod = isMod;
 		if (!isMod) {
-			this.id = Integer.parseInt(id);
+			try {
+				this.id = Long.parseLong(id,10);
+			} catch (NumberFormatException e) {
+				log.warn(String.format("%s is not a number, or a unknow error happen",id));
+				this.id = 0;
+			}
+			
 		} else {
 			this.filename = id;
 			if (id.contains(".pak")) {
 				try {
 					this.id = Integer.parseInt(id.replace(".pak", ""));
 				} catch (Exception e) {
+					log.debug(id+" is not a pak file (Mods)");
 					this.id = 0;
 				}
 			} else {
@@ -49,11 +57,11 @@ public class Mods implements Comparable<Mods> {
 		if (isMod) {
 			return filename;
 		}
-		return Integer.toString(id);
+		return Long.toString(id);
 
 	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
@@ -86,9 +94,12 @@ public class Mods implements Comparable<Mods> {
 
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
+			log.debug(a+" workshop id (url) is not correct (Mods)");
 		} catch (IOException e) {
 			e.printStackTrace();
+			log.debug(a+" workshop id (IO) is not correct (Mods)");
 		}
+		log.error("Error unknown with getHtml("+a+") for workshop id (Mods)");
 		return "Error";
 	}
 
@@ -101,12 +112,15 @@ public class Mods implements Comparable<Mods> {
 			jsonObject = (JSONObject) parser.parse(reader);
 			// String name = (String) jsonObject.get("name");
 		} catch (IOException e) {
+			log.warn("storage.json not found (Mods)");
 			e.printStackTrace();
 		} catch (ParseException e) {
+			log.error("storage.json can't be readed");
+			log.error("try to look with a JSON Viewer for fix it");
 			e.printStackTrace();
 		}
 		if (id != 0) {
-			title = (String) jsonObject.get(Integer.toString(id));
+			title = (String) jsonObject.get(Long.toString(id));
 		} else {
 			return filename;
 		}
@@ -116,14 +130,18 @@ public class Mods implements Comparable<Mods> {
 			int pos1 = html.indexOf("<div class=\"workshopItemTitle\">");
 			title = html.substring(pos1 + "<div class=\"workshopItemTitle\">".length(), html.indexOf("</div>", pos1));
 			if (!title.contains("html")) {
-				jsonObject.put(Integer.toString(id), title);//Un nom est trouvé
+				jsonObject.put(Long.toString(id), title);//Un nom est trouvé
+				log.info(String.format("Name found: %s = %s",title,filename));
 			}else {
-				jsonObject.put(Integer.toString(id), filename);//Un nom n'est pas trouvé
+				jsonObject.put(Long.toString(id), filename);//Un nom n'est pas trouvé
+				log.info(String.format("Name not found for %s (use filename)",title));
 			}
 			try (FileWriter file = new FileWriter("files/storage.json")) {
 				file.write(jsonObject.toJSONString());
+				log.info("Name writed in storage.json");
 			} catch (IOException e) {
 				e.printStackTrace();
+				log.warn("storage.json not found (Mods)");
 			}
 		}
 		if (!isMod) {
@@ -148,6 +166,7 @@ public class Mods implements Comparable<Mods> {
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
+				log.warn("config.ini not found (Mods)");
 				return title+" - "+ filename.replace(".Disabled.", "").replace(".disabled","");
 				
 			}

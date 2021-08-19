@@ -17,6 +17,7 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import org.apache.log4j.Logger;
 import org.ini4j.Ini;
 
 import javax.swing.ListSelectionModel;
@@ -37,6 +38,7 @@ public class EditorInstanceView extends JPanel implements ActionListener, ListSe
 	private JLabel txtWarning = new JLabel();
 	private JList<String> list = new JList<String>();
 	private DefaultListModel<String> activatedModel = new DefaultListModel<String>();
+	public static Logger log = Logger.getLogger(Logger.class.getName());
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	EditorInstanceView() {
@@ -125,6 +127,7 @@ public class EditorInstanceView extends JPanel implements ActionListener, ListSe
 					myWriter.close();
 				} catch (IOException e1) {
 					setWarning("config.ini not found");
+					log.warn("Config.ini not found (EditorInstance del_btn)");
 					e1.printStackTrace();
 				}
 			}

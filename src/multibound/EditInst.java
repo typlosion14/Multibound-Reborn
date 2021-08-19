@@ -20,6 +20,7 @@ import javax.swing.SwingConstants;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import org.apache.log4j.Logger;
 import org.ini4j.Ini;
 
 public class EditInst extends JPanel implements ActionListener, ListSelectionListener, Panel {
@@ -43,10 +44,13 @@ public class EditInst extends JPanel implements ActionListener, ListSelectionLis
 	private boolean isWorkshop;
 	private String[] combolist = { "default", "Instance" };
 	private JComboBox<String> comboBox;
+	public static Logger log = Logger.getLogger(Logger.class.getName());
 
 	EditInst(int INb, boolean a) {
 		isWorkshop = a;
+		log.info("Loading Instance "+INb+" (EditInst)");
 		instance = new Instance(INb);
+		log.info("Loaded Instance "+INb+" (EditInst)");
 		if (isWorkshop) {
 			Launcheur.setFrame("Multibound Reborn - Edit Workshop " + instance.getName(), 100, 100, 586, 404);
 			setBounds(100, 100, 586, 404);
@@ -81,13 +85,16 @@ public class EditInst extends JPanel implements ActionListener, ListSelectionLis
 		comboBox.setBounds(390, 8, 67, 20);
 		add(comboBox);
 		
-		
 		if (isWorkshop) {
+			log.info("Loading Workshop List (EditInst)");
 			disabledList = new JList<Mods>(instance.getDesactivedWorskshop(warningText));
 			activatedList = new JList<Mods>(instance.getWorkshopList());
+			log.info("Loaded Workshop List (EditInst)");
 		} else {
+			log.info("Loading Mods List (EditInst)");
 			disabledList = new JList<Mods>(instance.getDesactivedMods(warningText));
 			activatedList = new JList<Mods>(instance.getModsList());
+			log.info("Loaded Mods List (EditInst)");
 		}
 		setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		disabledList.setLayoutOrientation(JList.HORIZONTAL_WRAP);
@@ -219,6 +226,7 @@ public class EditInst extends JPanel implements ActionListener, ListSelectionLis
 					ini.store();
 				} catch (IOException e1) {
 					setWarning("config.ini not found");
+					log.warn("Config.ini not found (EditInst save_btn)");
 					e1.printStackTrace();
 				}
 				if (isWorkshop) {

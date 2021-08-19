@@ -4,37 +4,17 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JScrollPane;
+
 import javax.swing.SwingConstants;
-import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerListModel;
-import javax.swing.JComboBox;
-import javax.swing.JFileChooser;
-import javax.swing.JButton;
-import java.awt.Component;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.DefaultComboBoxModel;
-import java.awt.Color;
+
 import javax.swing.JProgressBar;
-import java.awt.BorderLayout;
+
 import java.awt.FlowLayout;
-import java.awt.CardLayout;
-import javax.swing.BoxLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import javax.swing.SpringLayout;
-import net.miginfocom.swing.MigLayout;
-import java.awt.GridLayout;
+
 
 public class test {
 
 	private JFrame frame;
-	private JTextField warningText;
 
 	/**
 	 * Launch the application.
