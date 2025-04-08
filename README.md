@@ -4,6 +4,9 @@
 
 [![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/U6U01NREQ)
 
+# Abandoned
+I fail to have the motivation to continue the project
+
 # Multibound-Reborn
 ## Install Tutorial EN:
 1. Go to Starbound files
